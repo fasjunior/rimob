@@ -1,0 +1,128 @@
+<?xml version='1.0' encoding='utf-8'?>
+<widget android-versionCode="20" defaultlocale="pt-BR" id="com.br.rimob" ios-CFBundleVersion="1.3.1" version="1.3.1" xmlns="http://www.w3.org/ns/widgets" xmlns:android="http://schemas.android.com/apk/res/android" xmlns:cdv="http://cordova.apache.org/ns/1.0" xmlns:gap="http://phonegap.com/ns/1.0">
+    <feature name="CDVWebViewEngine">
+        <param name="ios-package" value="CDVWebViewEngine" />
+    </feature>
+    <feature name="LaunchScreen">
+        <param name="ios-package" value="CDVLaunchScreen" />
+    </feature>
+    <feature name="LocalStorage">
+        <param name="ios-package" value="CDVLocalStorage" />
+    </feature>
+    <feature name="Console">
+        <param name="ios-package" value="CDVLogger" />
+        <param name="onload" value="true" />
+    </feature>
+    <feature name="HandleOpenUrl">
+        <param name="ios-package" value="CDVHandleOpenURL" />
+        <param name="onload" value="true" />
+    </feature>
+    <feature name="IntentAndNavigationFilter">
+        <param name="ios-package" value="CDVIntentAndNavigationFilter" />
+        <param name="onload" value="true" />
+    </feature>
+    <feature name="GestureHandler">
+        <param name="ios-package" value="CDVGestureHandler" />
+        <param name="onload" value="true" />
+    </feature>
+    <feature name="Camera">
+        <param name="ios-package" value="CDVCamera" />
+    </feature>
+    <feature name="Geolocation">
+        <param name="ios-package" value="CDVLocation" />
+    </feature>
+    <feature name="InAppBrowser">
+        <param name="ios-package" value="CDVWKInAppBrowser" />
+        <param name="onload" value="true" />
+    </feature>
+    <feature name="SplashScreen">
+        <param name="ios-package" value="CDVSplashScreen" />
+        <param name="onload" value="true" />
+    </feature>
+    <name>Rimob</name>
+    <description>Rimob - Recadastramento Imobiliário</description>
+    <author>3Tecnos Tecnologia</author>
+    <content src="index.html" />
+    <access launch-external="yes" origin="*" />
+    <allow-intent href="http://*/*" />
+    <allow-intent href="https://*/*" />
+    <allow-navigation href="*" />
+    <splash density="ldpi" height="426" orientation="portrait" platform="android" src="package-assets/splash-320X426.png" width="320" />
+    <splash density="mdpi" height="470" orientation="portrait" platform="android" src="package-assets/splash-320X470.png" width="320" />
+    <splash density="hdpi" height="640" orientation="portrait" platform="android" src="package-assets/splash-480X640.png" width="480" />
+    <splash density="xhdpi" height="960" orientation="portrait" platform="android" src="package-assets/splash-720X960.png" width="720" />
+    <splash density="ldpi" height="320" orientation="landscape" platform="android" src="package-assets/splash-426X320.png" width="426" />
+    <splash density="mdpi" height="320" orientation="landscape" platform="android" src="package-assets/splash-470X320.png" width="470" />
+    <splash density="hdpi" height="480" orientation="landscape" platform="android" src="package-assets/splash-640X480.png" width="640" />
+    <splash density="xhdpi" height="720" orientation="landscape" platform="android" src="package-assets/splash-960X720.png" width="960" />
+    <splash height="480" orientation="portrait" platform="ios" src="package-assets/splash-320X480.png" width="320" />
+    <splash height="960" orientation="portrait" platform="ios" src="package-assets/splash-640X960.png" width="640" />
+    <splash height="1136" orientation="portrait" platform="ios" src="package-assets/splash-640X1136.png" width="640" />
+    <splash height="1334" orientation="portrait" platform="ios" src="package-assets/splash-750X1334.png" width="750" />
+    <splash height="1024" orientation="portrait" platform="ios" src="package-assets/splash-768X1024.png" width="768" />
+    <splash height="2208" orientation="portrait" platform="ios" src="package-assets/splash-1242X2208.png" width="1242" />
+    <splash height="2048" orientation="portrait" platform="ios" src="package-assets/splash-1536X2048.png" width="1536" />
+    <splash height="2732" orientation="portrait" platform="ios" src="package-assets/splash-2048X2732.png" width="2048" />
+    <splash height="768" orientation="landscape" platform="ios" src="package-assets/splash-1024X768.png" width="1024" />
+    <splash height="750" orientation="landscape" platform="ios" src="package-assets/splash-1334X750.png" width="1334" />
+    <splash height="1536" orientation="landscape" platform="ios" src="package-assets/splash-2048X1536.png" width="2048" />
+    <splash height="1242" orientation="landscape" platform="ios" src="package-assets/splash-2208X1242.png" width="2208" />
+    <splash height="2048" orientation="landscape" platform="ios" src="package-assets/splash-2732X2048.png" width="2732" />
+    <icon density="ldpi" height="36" platform="android" src="package-assets/icon_36x36.png" width="36" />
+    <icon density="mdpi" height="48" platform="android" src="package-assets/icon_48x48.png" width="48" />
+    <icon density="hdpi" height="72" platform="android" src="package-assets/icon_72x72.png" width="72" />
+    <icon density="xhdpi" height="96" platform="android" src="package-assets/icon_96x96.png" width="96" />
+    <icon height="29" platform="ios" src="package-assets/icon_29x29.png" width="29" />
+    <icon height="58" platform="ios" src="package-assets/icon_58x58.png" width="58" />
+    <icon height="87" platform="ios" src="package-assets/icon_87x87.png" width="87" />
+    <icon height="60" platform="ios" src="package-assets/icon_60x60.png" width="60" />
+    <icon height="120" platform="ios" src="package-assets/icon_120x120.png" width="120" />
+    <icon height="180" platform="ios" src="package-assets/icon_180x180.png" width="180" />
+    <icon height="76" platform="ios" src="package-assets/icon_76x76.png" width="76" />
+    <icon height="152" platform="ios" src="package-assets/icon_152x152.png" width="152" />
+    <icon height="40" platform="ios" src="package-assets/icon_40x40.png" width="40" />
+    <icon height="80" platform="ios" src="package-assets/icon_80x80.png" width="80" />
+    <icon height="57" platform="ios" src="package-assets/icon_57x57.png" width="57" />
+    <icon height="114" platform="ios" src="package-assets/icon_114x114.png" width="114" />
+    <icon height="72" platform="ios" src="package-assets/icon_72x72.png" width="72" />
+    <icon height="144" platform="ios" src="package-assets/icon_144x144.png" width="144" />
+    <icon height="50" platform="ios" src="package-assets/icon_50x50.png" width="50" />
+    <icon height="100" platform="ios" src="package-assets/icon_100x100.png" width="100" />
+    <icon height="167" platform="ios" src="package-assets/icon_167x167.png" width="167" />
+    <gap:config-file mode="merge" parent="/manifest/application" platform="android">
+        <activity android:launchMode="singleTop" />
+    </gap:config-file>
+    <gap:config-file mode="replace" parent="NSPhotoLibraryUsageDescription" platform="ios">
+        <string>Este aplicativo requer acesso à biblioteca de fotos.</string>
+    </gap:config-file>
+    <gap:config-file mode="replace" parent="NSCameraUsageDescription" platform="ios">
+        <string>Este aplicativo requer acesso à câmera</string>
+    </gap:config-file>
+    <access origin="*" />
+    <preference name="AllowInlineMediaPlayback" value="false" />
+    <preference name="BackupWebStorage" value="cloud" />
+    <preference name="DisallowOverscroll" value="false" />
+    <preference name="EnableViewportScale" value="false" />
+    <preference name="KeyboardDisplayRequiresUserAction" value="true" />
+    <preference name="MediaTypesRequiringUserActionForPlayback" value="none" />
+    <preference name="SuppressesIncrementalRendering" value="false" />
+    <preference name="SuppressesLongPressGesture" value="false" />
+    <preference name="Suppresses3DTouchGesture" value="false" />
+    <preference name="GapBetweenPages" value="0" />
+    <preference name="PageLength" value="0" />
+    <preference name="PaginationBreakingMode" value="page" />
+    <preference name="PaginationMode" value="unpaginated" />
+    <preference name="CameraUsesGeolocation" value="false" />
+    <preference name="android-build-tool" value="gradle" />
+    <preference name="phonegap-version" value="cli-6.5.0" />
+    <preference name="xwalkMultipleApk" value="false" />
+    <preference name="deployment-target" value="12" />
+    <preference name="ios-configuration" value="adhoc" />
+    <feature name="File">
+        <param name="ios-package" value="CDVFile" />
+        <param name="onload" value="true" />
+    </feature>
+    <feature name="FileTransfer">
+        <param name="ios-package" value="CDVFileTransfer" />
+    </feature>
+</widget>

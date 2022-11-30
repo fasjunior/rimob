@@ -1,0 +1,67 @@
+﻿<!-- Content Header (Page header) -->
+<div ng-if="$root.exibePainel" ng-cloak>
+    <section class="content-header painelView">
+        <h1>
+            Painel de Controle
+        </h1>
+        <ol class="breadcrumb">
+            <li><a href="#/"><i class="fa fa-dashboard"></i> Principal</a></li>
+            <li class="active">Painel de Controle</li>
+        </ol>
+
+    </section>
+
+    <section class="content">
+
+        <!--<ng-md-icon icon="home" size="26"></ng-md-icon>
+        <br />
+        <span>Imóveis</span>-->
+        <div class="col-md-14">
+            <div class="info-box bg-painel-controle">
+                <a class="disableLinkColor" ng-href="{{$root.parametroAgente.RelImoveis && $root.parametroAgente.RelImoveis == 2 ? '#/imovel/setores':'#/imovel/bairros'}}">
+                    <span class="info-box-icon"><i class="ion-ios-home-outline"></i></span>
+                    <div class="info-box-content">
+                        <span class="info-box-text">Imóveis</span>
+                        <span class="info-box-number">{{totalImoveis}}</span>
+                        <div class="progress">
+                            <div class="progress-bar"></div>
+                        </div>
+                        <span class="progress-description">
+                            {{progressImoveis}} finalizados
+                        </span>
+                    </div>
+                    <!-- /.info-box-content -->
+                </a>
+                
+            </div>
+
+            <div class="info-box bg-painel-controle">
+                <span class="info-box-icon"><i class="ion ion-ios-people-outline"></i></span>
+                <div class="info-box-content">
+                    <span class="info-box-text">Contribuintes</span>
+                    <span class="info-box-number">{{totalContribuintes}}</span>
+                    <span class="progress-description">
+                        {{$root.novosContribuintes}} <span ng-if="$root.novosContribuintes<=1">adicionado</span>
+                        <span ng-if="$root.novosContribuintes>1">adicionados</span>
+                    </span>
+                </div>
+                <!-- /.info-box-content -->
+            </div>
+        </div>
+        <br />
+        <div layout="row" layout-align="space-around center">
+            <a ng-href="{{$root.parametroAgente.RelImoveis && $root.parametroAgente.RelImoveis == 2 ? '#/imovel/setores':'#/imovel/bairros'}}" class="btn btn-app">
+                <i class="fa fa-home"></i> Imóveis
+            </a>
+            <a class="btn btn-app" ng-click="showBackEndImport()">
+                <span class="badge bg-red"></span>
+                <i class="fa fa-cloud-download"></i> Importar
+            </a>
+            <a class="btn btn-app" ng-click="showBackEndExport()">
+                <i class="fa fa-cloud-upload"></i> Exportar
+            </a>
+        </div>
+
+    </section>
+
+</div>

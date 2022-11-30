@@ -1,0 +1,60 @@
+﻿<section class="content">
+    <div class="row">
+        <div class="col-md-9" ng-init="obterMensagens()">
+            <div class="box box-primary">
+                <div class="box-header with-border">
+                    <h3 class="box-title">Mensagens</h3>
+                    <!-- /.box-tools -->
+                </div>
+                <!-- /.box-header -->
+                <div class="box-body no-padding">
+                    <div class="mailbox-controls">
+                        <!-- Check all button -->
+                        <button type="button" ng-disabled="mensagens.length == 0" ng-click="selecionaTodas()" class="btn btn-default btn-sm checkbox-toggle">
+                            <i id="cbSelecionaTodas" class="fa fa-square-o"></i>
+                        </button>
+                        <div class="btn-group">
+                            <button type="button" ng-disabled="qtdMsgSelecionadas == 0" ng-click="apagarMensagens(mensagens)" class="btn btn-default btn-sm"><i class="fa fa-trash-o"></i></button>
+                        </div>
+                        <!-- /.btn-group -->
+                        <button type="button" class="btn btn-default btn-sm"><i class="fa fa-refresh"></i></button>
+                        
+                        <!-- /.pull-right -->
+                    </div>
+                    <div class="table-responsive mailbox-messages">
+                        <table class="table table-hover table-striped">
+                            <tbody>
+                                <tr dir-paginate="mensagem in mensagens | itemsPerPage:5">
+                                    <td><input type="checkbox" ng-change="selecionaMensagem(mensagem)"  ng-model="mensagem.checked"></td>
+                                    <td class="mailbox-name"><a href="#/mensagem/{{mensagem.SqNotificacao}}">{{mensagem.DsTitulo | ellipsis: 12}}</a></td>
+                                    <td class="mailbox-subject">
+                                        {{mensagem.DsConteudo | ellipsis: 10}}
+                                    </td>
+                                    <td class="mailbox-attachment"></td>
+                                    <td class="mailbox-date">{{mensagem.DtNotificacao}}</td>
+                                </tr>
+                                <tr ng-if="mensagens.length == 0">
+                                    <td>Nenhuma mensagem!</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="text-center">
+                            <dir-pagination-controls max-size="5"
+                                                     direction-links="true"
+                                                     boundary-links="true">
+                            </dir-pagination-controls>
+                        </div>
+                        <!-- /.table -->
+                    </div>
+                    <!-- /.mail-box-messages -->
+                </div>
+                <!-- /.box-body -->
+            </div>
+            <!-- /. box -->
+        </div>
+
+    </div>
+
+</section>
+
+

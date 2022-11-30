@@ -1,0 +1,58 @@
+﻿[
+  {
+    "id": 1,
+    "queries": [
+      "create table if not exists Db_Version (id integer);",
+      "insert into Db_Version (id) values (1);",
+      "alter table Imovel add column NuSetorlogradouro varchar(20);",
+      "alter table Imovel add column NuQuadralogradouro varchar(20);",
+      "alter table Imovel add column NuLotelogradouro varchar(20);",
+      "alter table Imovel add column SqCondominio integer;",
+      "alter table Imovel add column SqLoteamento integer;",
+      "alter table Imovel add column SqSecao integer;",
+      "alter table Imovel add column SqFace integer;",
+      "alter table Imovel add column NuApartamento varchar(20);",
+      "alter table Imovel add column NmBloco varchar(50);",
+      "alter table Imovel add column CdMunicipio varchar(7);",
+      "alter table Imovel add column NuLogradourocorrespondencia varchar(20);",
+      "alter table Imovel add column DsLogradourocorrespondencia varchar(120);",
+      "alter table Imovel add column DsComplementocorrespondencia varchar(120);",
+      "alter table Imovel add column DsBairrocorrespondencia varchar(120);",
+      "alter table Imovel add column SqCartorio integer;",
+      "alter table Imovel add column DtEscritura datetime;",
+      "alter table Imovel add column NuEscritura varchar(20);",
+      "alter table Imovel add column NuLivroregistro varchar(20);",
+      "alter table Imovel add column NuFolhalivroregistro integer;",
+      "alter table Imovel add column SqContribuinteresponsavel integer;",
+      "alter table Imovel add column SqContribuinterecadastramentoresponsavel integer;",
+      "alter table Imovel add column VlAreaunidade decimal(15,2);",
+      "alter table Imovel add column CdPais integer;",
+      "alter table Imovel add column FlNovoResponsavel integer;",
+      "alter table Contribuinte add column FlEditado integer;",
+      "alter table Area_Imovel add column FlIrregular varchar(1);",
+      "create table if not exists Condominio (SqCondominio integer primary key, NmCondominio varchar(120), SqBairro integer, SqLogradouro integer);",
+      "create table if not exists Secao (SqSecao integer primary key, NmSecao varchar(80), NuSecao integer);",
+      "create table if not exists Face (SqFace integer primary key, NuFace integer, SqBairro integer, SqLogradouro integer, SqQuadra integer);",
+      "create table if not exists Loteamento (SqLoteamento integer primary key, NmLoteamento varchar(120), SqBairro integer, SqDistrito integer);",
+      "create table if not exists Cartorio (SqCartorio integer primary key, NmCartorio varchar(120), NuCnpjcartorio varchar(14));",
+      "create table if not exists Entrevistado (NuCnpj varchar(14), SqEntrevistadorecadastramento integer, NmEntrevistado varchar(120), NuCpfentrevistado char(11), NuRgentrevistado varchar(20), DsVinculoentrevistado varchar(80), DsContatoentrevistado varchar(200), SqImovelrecadastramento integer,SqAgenteimobiliario integer, SqImovel integer);",
+      "alter table Parametro add column SgUf varchar(2);"
+    ]
+  },
+  {
+    "id": 2,
+    "queries": [
+      "alter table Imovel add column DsObservacao varchar(500);",
+      "update Db_Version set id = 2;"
+    ]
+  },
+  {
+    "id": 3,
+    "queries": [
+      "alter table Area_Agente add column SqSetor integer;",
+      "alter table Area_Agente add column SqQuadra integer;",
+      "alter table Parametro add column RelImoveis integer;",
+      "update Db_Version set id = 3;"
+    ]
+  }
+]

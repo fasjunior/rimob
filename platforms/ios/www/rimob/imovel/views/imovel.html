@@ -1,0 +1,41 @@
+﻿<div class="row">
+    <div class="col-xs-12">
+        <div class="box">
+            <div class="box-header" layout="row">
+                <ng-md-icon ta-back icon="navigate_before" style="fill: darkblue" size="32"></ng-md-icon>
+                <h3 style="padding-top: 8px; font-weight: 600;" class="box-title" ng-if="logradouro.NmLogradouro">{{logradouro.NmLogradouro | ellipsis: 16}}</h3>
+                <h3 style="padding-top: 8px; font-weight: 600;" class="box-title" ng-if="!logradouro.NmLogradouro">{{quadra.NmQuadra | ellipsis: 16}}</h3>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body table-responsive no-padding" ng-cloak>
+                <md-list flex>
+                    <md-subheader class="md-no-sticky">Selecione o imóvel</md-subheader>
+                    <ta-findbox promisefunction="obterImoveis(dsBusca)" targetobject="imoveis"></ta-findbox>
+                    <md-list-item class="md-3-line" href="#/imovel/bairros/logradouros/imoveis/{{imovel.SqBairro}}/{{imovel.SqLogradouro}}/{{imovel.SqImovelrecadastramento}}"
+                                  ng-repeat="imovel in imoveis">
+                        <div class="md-list-item-text" layout="column">
+                            <h3>
+                                {{imovel.NuPublico}} - {{imovel.NuLogradouro}}
+                                <small style="margin-left:5px;" ng-show="imovel.FlModificado==2" class="label bg-light-blue"> Novo </small>
+                                <small ng-show="imovel.FlModificado == 1" style="color:red; margin-left:5px;"><b>Editado</b></small>
+                            </h3>
+                            <p>
+                                Quadra Log.: <b>{{imovel.NuQuadralogradouro}}</b> - Lote Log.:<b> {{imovel.NuLotelogradouro}}</b>
+                            </p>
+                        </div>
+                        <md-button class="md-secondary md-icon-button" aria-label="editar">
+                            <ng-md-icon class="pull-right iconGrey" icon="mode_edit" size="20"></ng-md-icon>
+                        </md-button>
+                        <md-divider></md-divider>
+                    </md-list-item>
+                </md-list>
+                <md-button ng-if="exibeBtnAddImovel" id="btnFABImovel" class="md-fab md-fab-bottom-right" aria-label="adicionar imovel"
+                           href="#/imovel/bairros/logradouros/imoveis/{{SqBairro}}/{{SqLogradouro}}/0">
+                    <ng-md-icon class="iconWhite" icon="add" size="26"></ng-md-icon>
+                </md-button>
+            </div>
+            <!-- /.box-body -->
+        </div>
+        <!-- /.box -->
+    </div>
+</div>

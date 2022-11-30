@@ -1,0 +1,27 @@
+﻿<div class="row">
+    <div class="col-xs-12">
+        <div class="box">
+            <div class="box-header" layout="row">
+                <ng-md-icon ta-back icon="navigate_before" style="fill: darkblue" size="32"></ng-md-icon>
+                <h3 style="padding-top: 8px; font-weight:600;" class="box-title">{{bairro.NmBairro | ellipsis: 15}}</h3>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body table-responsive no-padding">
+                <md-list ng-cloak>
+                    <md-subheader class="md-no-sticky">Selecione o logradouro</md-subheader>
+                    <ta-findbox promisefunction="obterLogradouros(dsBusca)" targetobject="logradouros"></ta-findbox>
+                    <md-list-item href="#/imovel/bairros/logradouros/imoveis/{{logradouro.SqBairro}}/{{logradouro.SqLogradouro}}" ng-repeat="logradouro in logradouros">
+                        <p>
+                            {{logradouro.NmLogradouro | uppercase}}
+                            <ng-md-icon ng-show="logradouro.qtImoveis == 0" class="iconGreen" icon="done" size="20"></ng-md-icon>
+                        </p>
+                        <i class="fa fa-angle-right pull-right"></i>
+                    </md-list-item>
+                    <md-divider></md-divider>
+                </md-list>
+            </div>
+            <!-- /.box-body -->
+        </div>
+        <!-- /.box -->
+    </div>
+</div>

@@ -1,0 +1,44 @@
+﻿<section class="content">
+     <div class="row">
+              <div class="col-xs-12">
+                  <div class="box">
+                      <div class="box-header">
+                          <h3 class="box-title">Exportação</h3>
+                      </div>
+                      <!-- /.box-header -->
+                      <div class="box-body table-responsive no-padding">
+                          <table class="table table-hover">
+                              <tr>
+                                  <th ng-click="sort('NmTabela')">Tabela</th>
+                                  <th ng-click="sort('FlExportada')">Envio</th>
+                              </tr>
+                              <tr dir-paginate="tab in tabelasExportacao | orderBy:sortKey:reverse | itemsPerPage:5">
+                                  <td>{{tab.NmTabela}}</td>
+                                  <td ng-if="tab.FlExportada == 1"><span class="label label-success">Sucesso</span></td>
+                                  <td ng-if="tab.FlExportada != 1"><span class="label label-danger">Falha</span></td>
+                              </tr>
+                              <tr ng-if="tabelasExportacao.length == 0">
+                                  <td>Nenhuma exportação realizada!</td>
+                              </tr>
+                          </table>
+                          <div class="text-center">
+                              <dir-pagination-controls max-size="5"
+                                                       direction-links="true"
+                                                       boundary-links="true">
+                              </dir-pagination-controls>
+                          </div>
+                      </div>
+                      <!-- /.box-body -->
+                  </div>
+                  <!-- /.box -->
+                  <section layout="row" layout-align="center center" layout-wrap>
+                      <md-button ta-back class="md-raised">Voltar</md-button> 
+                      <md-button id="btnPanel" ng-controller="showBackEndImportCtrl" ng-click="showBackEndExport($event);"
+                                 class="md-raised md-primary">Exportar</md-button>
+                  </section>
+                  
+              </div>
+          
+          </div>
+</section>
+

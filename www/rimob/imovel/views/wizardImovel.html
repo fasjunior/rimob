@@ -1,0 +1,799 @@
+﻿<div ng-init="obterDadosImovel()" ng-cloak>
+
+    <md-content>
+        <md-whiteframe class="md-whiteframe-1dp" layout layout-align="center center" style="text-align:center; margin-bottom: 0px; background: #390aec29; height: 30px;">
+            <span>Inscrição: <b>{{imovel.NuPublico}}</b> - Nr. Logradouro: <b>{{imovel.NuLogradouro}}</b></span>
+        </md-whiteframe>
+        <div style="display: flex; align-items: center; margin-top: 5px;" ng-swipe-right="previousTab()" ng-swipe-left="nextTab()">
+            <div style="display: flex; align-items: center;">
+                <ng-md-icon ng-click="firstTab()" icon="first_page" size="40" style="height: 40px; margin-right: 10px;" ng-class="{'iconGrey': (currentNavIndex != 1), 'iconDisabled': (currentNavIndex == 1)}"></ng-md-icon>
+                <ng-md-icon ng-click="previousTab()" icon="navigate_before" size="40" style="height: 40px;" ng-class="{'iconGrey': (currentNavIndex != 1), 'iconDisabled': (currentNavIndex == 1)}"></ng-md-icon>
+            </div>
+            <div style="margin-left: auto;">
+                <span style="font-weight: 600; font-size: medium; color: rgb(128, 128, 128);">{{infoTab}}</span>
+            </div>
+            <div style="display: flex; align-items: center; margin-left: auto;">
+                <ng-md-icon ng-click="nextTab()" icon="navigate_next" size="40" style="height: 40px;" ng-class="{'iconGrey': !disableNext, 'iconDisabled': disableNext}"></ng-md-icon>
+                <ng-md-icon ng-click="lastTab()" icon="last_page" size="40" style="height: 40px; margin-left: 10px;" ng-class="{'iconGrey': !disableNext, 'iconDisabled': disableNext}"></ng-md-icon>
+            </div>
+        </div>
+
+        <md-content ng-show="currentNavIndex == 1" class="md-padding" ng-swipe-right="previousTab()" ng-swipe-left="nextTab()">
+            <div class="box box-info">
+                <div class="box-header with-border" style="display: flex;">
+                    <h3 class="box-title">Identificação do Contribuinte</h3>
+
+                    <md-switch style="margin-left: auto; margin-top: -5px; font-size: large;" ng-if="contribuinte.SqContribuinterecadastramento" name="flEditar" ng-model="contribuinte.FlEditado" ng-true-value="1" ng-false-value="0" aria-label="Editar contribuinte">
+                        Editar
+                    </md-switch>
+                </div>
+                <div class="box-body">
+                    <md-content layout-padding>
+                        <form role="form" name="contribuinteForm" style="color:black;">
+                            <md-input-container class="md-block">
+                                <label>Contribuinte</label>
+                                <input type="text" name="NmContribuinte" ng-model="contribuinte.NmContribuinte" ng-disabled="!contribuinte.FlEditado">
+                            </md-input-container>
+
+                            <md-input-container class="md-block">
+                                <label>CPF/CNPJ</label>
+                                <input type="tel" name="NuCpfcnpjcontribuinte" ng-model="contribuinte.NuCpfcnpjcontribuinte" ng-disabled="!contribuinte.FlEditado" ta-cpf-cnpj>
+                                <div ng-messages="contribuinteForm.NuCpfcnpjcontribuinte.$error">
+                                    <div ng-message="cpfInvalid">CPF inválido!</div>
+                                    <div ng-message="cnpjInvalid">CNPJ inválido!</div>
+                                </div>
+                            </md-input-container>
+
+                            <md-input-container class="md-block">
+                                <label>País</label>
+                                <md-select ng-disabled="!contribuinte.FlEditado" ng-model="contribuinte.CdPais" data-md-container-class="selectSelectHeader" md-on-open="obterPaises()" ng-change="verificaPaisContribuinteSelecionado()">
+                                    <md-option ng-repeat="pais in paises" ng-value="pais.CdPais">
+                                        {{pais.NmPais}}
+                                    </md-option>
+                                </md-select>
+                            </md-input-container>
+
+                            <div layout="row">
+                                <md-input-container flex="30">
+                                    <label>Estado</label>
+                                    <md-select ng-disabled="(!contribuinte.FlEditado) || (contribuinte.CdPais != 76)" ng-model="municipioContribuinte.SgUf" ng-change="verificaEstadoContribuinteSelecionado()">
+                                        <!--<md-option><em>- Selecione -</em></md-option>-->
+                                        <md-option ng-repeat="estado in estados" ng-value="estado.SgUf">
+                                            {{estado.SgUf}}
+                                        </md-option>
+                                    </md-select>
+                                </md-input-container>
+                                <md-input-container flex="70">
+                                    <label>Município</label>
+                                    <md-select ng-disabled="(!contribuinte.FlEditado) || (contribuinte.CdPais != 76)" ng-model="contribuinte.CdMunicipio" md-on-open="obterMunicipiosContribuinte(municipioContribuinte.SgUf)">
+                                        <md-option ng-repeat="municipio in municipiosContribuinte" ng-value="municipio.CdMunicipio" data-ng-click="verificaMunicipioContribuinteSelecionado(municipio.CdMunicipio)">
+                                            {{municipio.NmMunicipio}}
+                                        </md-option>
+                                    </md-select>
+                                </md-input-container>
+                            </div>
+
+                            <md-input-container ng-if="!municipioIgualDaUG" class="md-block">
+                                <label>Bairro</label>
+                                <input type="text" ng-model="contribuinte.DsBairro" ng-disabled="!contribuinte.FlEditado">
+                            </md-input-container>
+                            <md-input-container ng-if="municipioIgualDaUG" class="md-block">
+                                <label>Bairro</label>
+                                <md-select ng-disabled="!contribuinte.FlEditado" ng-model="contribuinte.SqBairro" md-on-open="obterBairros(contribuinte.CdMunicipio, bairros)" ng-change="verificaBairroContribuinteSelecionado()">
+                                    <md-option ng-repeat="bairro in bairros" ng-value="bairro.SqBairro">
+                                        {{bairro.NmBairro}}
+                                    </md-option>
+                                </md-select>
+                            </md-input-container>
+
+                            <md-input-container ng-if="!municipioIgualDaUG" class="md-block">
+                                <label>Logradouro</label>
+                                <input type="text" ng-disabled="!contribuinte.FlEditado" ng-model="contribuinte.DsLogradouro">
+                            </md-input-container>
+                            <md-input-container style="margin-top: 25px;" ng-if="municipioIgualDaUG" class="md-block">
+                                <label>Logradouro</label>
+                                <md-select ng-disabled="!contribuinte.FlEditado" ng-model="contribuinte.SqLogradouro" md-on-open="obterLogradouros(contribuinte.SqBairro, logradouros)">
+                                    <md-option ng-repeat="logradouro in logradouros" ng-value="logradouro.SqLogradouro">
+                                        {{logradouro.NmLogradouro}}
+                                    </md-option>
+                                </md-select>
+                            </md-input-container>
+
+                            <div layout="row">
+                                <md-input-container flex="50">
+                                    <label>Número do Imóvel</label>
+                                    <input type="text" name="NuLogradouro" ng-model="contribuinte.NuLogradouro" ng-disabled="!contribuinte.FlEditado" />
+                                </md-input-container>
+                                <md-input-container flex="50">
+                                    <label>CEP</label>
+                                    <input type="text" name="NuCep" ng-model="contribuinte.NuCep" ta-cep ng-disabled="!contribuinte.FlEditado" />
+                                </md-input-container>
+                            </div>
+                            <md-input-container class="md-block">
+                                <label>Complemento</label>
+                                <input type="text" name="DsComplemento" ng-model="contribuinte.DsComplemento" ng-disabled="!contribuinte.FlEditado">
+                            </md-input-container>
+                            <div layout="row">
+                                <md-input-container flex="50">
+                                    <label>Celular</label>
+                                    <input type="text" name="NuCelular" ng-model="contribuinte.NuCelular" ta-tel ng-disabled="!contribuinte.FlEditado" />
+                                </md-input-container>
+                                <md-input-container flex="50">
+                                    <label>Telefone</label>
+                                    <input type="text" name="NuTelefone" ng-model="contribuinte.NuTelefone" ta-tel ng-disabled="!contribuinte.FlEditado" />
+                                </md-input-container>
+                            </div>
+                        </form>
+
+                    </md-content>
+                </div>
+            </div>
+        </md-content>
+
+        <md-content ng-show="currentNavIndex == 2" class="md-padding" ng-swipe-right="previousTab()" ng-swipe-left="nextTab()">
+            <div class="box box-info">
+                <div class="box-header with-border" style="display: flex;">
+                    <h3 class="box-title">Identificação do Responsável</h3>
+
+                    <md-switch style="margin-left: auto; margin-top: -5px; font-size: large;" ng-if="contribuinteResponsavel.SqContribuinterecadastramento" name="flEditar" ng-model="contribuinteResponsavel.FlEditado" ng-true-value="1" ng-false-value="0" aria-label="Editar responsável">
+                        Editar
+                    </md-switch>
+                </div>
+                <div class="box-body">
+                    <md-content layout-padding>
+                        <form role="form" name="contribuinteResponsavelForm" style="color:black;">
+                            <md-input-container class="md-block">
+                                <label>Contribuinte</label>
+                                <input type="text" name="NmContribuinte" ng-model="contribuinteResponsavel.NmContribuinte" ng-disabled="!contribuinteResponsavel.FlEditado">
+                            </md-input-container>
+
+                            <md-input-container class="md-block">
+                                <label>CPF/CNPJ</label>
+                                <input type="tel" name="NuCpfcnpjcontribuinte" ng-model="contribuinteResponsavel.NuCpfcnpjcontribuinte" ng-disabled="!contribuinteResponsavel.FlEditado" ta-cpf-cnpj>
+                                <div ng-messages="contribuinteResponsavelForm.NuCpfcnpjcontribuinte.$error">
+                                    <div ng-message="cpfInvalid">CPF inválido!</div>
+                                    <div ng-message="cnpjInvalid">CNPJ inválido!</div>
+                                </div>
+                            </md-input-container>
+
+                            <md-input-container class="md-block">
+                                <label>País</label>
+                                <md-select ng-disabled="!contribuinteResponsavel.FlEditado" ng-model="contribuinteResponsavel.CdPais" data-md-container-class="selectSelectHeader" md-on-open="obterPaises()" ng-change="verificaPaisResponsavelSelecionado()">
+                                    <md-option ng-repeat="pais in paises" ng-value="pais.CdPais">
+                                        {{pais.NmPais}}
+                                    </md-option>
+                                </md-select>
+                            </md-input-container>
+
+                            <div layout="row">
+                                <md-input-container flex="30">
+                                    <label>Estado</label>
+                                    <md-select ng-disabled="(!contribuinteResponsavel.FlEditado) || (contribuinteResponsavel.CdPais != 76)" ng-model="municipioResponsavel.SgUf" ng-change="verificaEstadoResponsavelSelecionado()">
+                                        <!--<md-option><em>- Selecione -</em></md-option>-->
+                                        <md-option ng-repeat="estado in estados" ng-value="estado.SgUf">
+                                            {{estado.SgUf}}
+                                        </md-option>
+                                    </md-select>
+                                </md-input-container>
+                                <md-input-container flex="70">
+                                    <label>Município</label>
+                                    <md-select ng-disabled="(!contribuinteResponsavel.FlEditado) || (contribuinteResponsavel.CdPais != 76)" ng-model="contribuinteResponsavel.CdMunicipio" md-on-open="obterMunicipiosResponsavel(municipioResponsavel.SgUf)">
+                                        <md-option ng-repeat="municipio in municipiosResponsavel" ng-value="municipio.CdMunicipio" data-ng-click="verificaMunicipioResponsavelSelecionado(municipio.CdMunicipio)">
+                                            {{municipio.NmMunicipio}}
+                                        </md-option>
+                                    </md-select>
+                                </md-input-container>
+                            </div>
+
+                            <md-input-container ng-if="!municipioResponsavelIgualDaUG" class="md-block">
+                                <label>Bairro</label>
+                                <input type="text" ng-model="contribuinteResponsavel.DsBairro" ng-disabled="!contribuinteResponsavel.FlEditado">
+                            </md-input-container>
+                            <md-input-container ng-if="municipioResponsavelIgualDaUG" class="md-block">
+                                <label>Bairro</label>
+                                <md-select ng-disabled="!contribuinteResponsavel.FlEditado" ng-model="contribuinteResponsavel.SqBairro" md-on-open="obterBairros(contribuinteResponsavel.CdMunicipio, bairrosResponsavel)" ng-change="verificaBairroResponsavelSelecionado()">
+                                    <md-option ng-repeat="bairro in bairrosResponsavel" ng-value="bairro.SqBairro">
+                                        {{bairro.NmBairro}}
+                                    </md-option>
+                                </md-select>
+                            </md-input-container>
+
+                            <md-input-container ng-if="!municipioResponsavelIgualDaUG" class="md-block">
+                                <label>Logradouro</label>
+                                <input type="text" ng-disabled="!contribuinteResponsavel.FlEditado" ng-model="contribuinteResponsavel.DsLogradouro">
+                            </md-input-container>
+                            <md-input-container style="margin-top: 25px;" ng-if="municipioResponsavelIgualDaUG" class="md-block">
+                                <label>Logradouro</label>
+                                <md-select ng-disabled="!contribuinteResponsavel.FlEditado" ng-model="contribuinteResponsavel.SqLogradouro" md-on-open="obterLogradouros(contribuinteResponsavel.SqBairro, logradourosResponsavel)">
+                                    <md-option ng-repeat="logradouro in logradourosResponsavel" ng-value="logradouro.SqLogradouro">
+                                        {{logradouro.NmLogradouro}}
+                                    </md-option>
+                                </md-select>
+                            </md-input-container>
+
+                            <div layout="row">
+                                <md-input-container flex="50">
+                                    <label>Número do Imóvel</label>
+                                    <input type="text" name="NuLogradouro" ng-model="contribuinteResponsavel.NuLogradouro" ng-disabled="!contribuinteResponsavel.FlEditado" />
+                                </md-input-container>
+                                <md-input-container flex="50">
+                                    <label>CEP</label>
+                                    <input type="text" name="NuCep" ng-model="contribuinteResponsavel.NuCep" ta-cep ng-disabled="!contribuinteResponsavel.FlEditado" />
+                                </md-input-container>
+                            </div>
+                            <md-input-container class="md-block">
+                                <label>Complemento</label>
+                                <input type="text" name="DsComplemento" ng-model="contribuinteResponsavel.DsComplemento" ng-disabled="!contribuinteResponsavel.FlEditado">
+                            </md-input-container>
+                            <div layout="row">
+                                <md-input-container flex="50">
+                                    <label>Celular</label>
+                                    <input type="text" name="NuCelular" ng-model="contribuinteResponsavel.NuCelular" ta-tel ng-disabled="!contribuinteResponsavel.FlEditado" />
+                                </md-input-container>
+                                <md-input-container flex="50">
+                                    <label>Telefone</label>
+                                    <input type="text" name="NuTelefone" ng-model="contribuinteResponsavel.NuTelefone" ta-tel ng-disabled="!contribuinteResponsavel.FlEditado" />
+                                </md-input-container>
+                            </div>
+                        </form>
+
+                    </md-content>
+                </div>
+            </div>
+        </md-content>
+
+        <md-content ng-if="currentNavIndex == 3" class="md-padding" ng-swipe-right="previousTab()" ng-swipe-left="nextTab()">
+            <div class="box box-info">
+                <div class="box-header with-border">
+                    <h3 class="box-title">Distrito</h3>
+                </div>
+                <div class="box-body">
+                    <md-content layout-padding class="distritoScroll">
+                        <div infinite-scroll='infiniteScroll(distritos, distritosDisplayed)' infinite-scroll-distance='0.5' infinite-scroll-container='".distritoScroll"'>
+                            <div ng-repeat="distrito in distritosDisplayed track by distrito.SqDistrito">
+                                <md-checkbox ng-model="distrito.checked"
+                                             ng-checked="imovel.SqDistrito == distrito.SqDistrito"
+                                             ng-change="atualizaDistrito($index, distritos)">
+                                    {{distrito.NmDistrito}}
+                                </md-checkbox>
+                            </div>
+                        </div>
+
+                    </md-content>
+                </div>
+            </div>
+        </md-content>
+
+        <md-content ng-if="currentNavIndex == 4" class="md-padding" ng-swipe-right="previousTab()" ng-swipe-left="nextTab()">
+            <div class="box box-info">
+                <div class="box-header with-border">
+                    <h3 class="box-title">Setor</h3>
+                </div>
+                <div class="box-body">
+                    <md-content layout-padding class="setorScroll">
+                        <div infinite-scroll="infiniteScroll(setores, setoresDisplayed)" infinite-scroll-distance='0.5' infinite-scroll-container='".setorScroll"'>
+                            <div ng-repeat="setor in setoresDisplayed track by setor.SqSetor">
+                                <md-checkbox ng-model="setor.checked"
+                                             ng-checked="imovel.SqSetor == setor.SqSetor"
+                                             ng-change="atualizaSetor($index, setores)">
+                                    {{setor.NmSetor}}
+                                </md-checkbox>
+                            </div>
+                        </div>
+
+                    </md-content>
+                </div>
+            </div>
+        </md-content>
+
+        <md-content ng-if="currentNavIndex == 5" class="md-padding" ng-swipe-right="previousTab()" ng-swipe-left="nextTab()">
+            <div class="box box-info">
+                <div class="box-header with-border">
+                    <h3 class="box-title">Quadra</h3>
+                </div>
+                <div class="box-body">
+                    <md-content layout-padding class="quadraScroll">
+                        <div infinite-scroll="infiniteScroll(quadras, quadrasDisplayed)" infinite-scroll-distance='0.5' infinite-scroll-container='".quadraScroll"'>
+                            <div ng-repeat="quadra in quadrasDisplayed track by quadra.SqQuadra">
+                                <md-checkbox ng-model="quadra.checked"
+                                             ng-checked="imovel.SqQuadra == quadra.SqQuadra"
+                                             ng-change="atualizaQuadra($index, quadras)">
+                                    {{quadra.NmQuadra}}
+                                </md-checkbox>
+                            </div>
+                        </div>
+                    </md-content>
+                </div>
+            </div>
+        </md-content>
+
+        <md-content ng-if="currentNavIndex == 6" class="md-padding" ng-swipe-right="previousTab()" ng-swipe-left="nextTab()">
+            <div class="box box-info">
+                <div class="box-header with-border">
+                    <h3 class="box-title">Condomínio</h3>
+                </div>
+                <div class="box-body">
+                    <md-content layout-padding class="condominioScroll">
+                        <div infinite-scroll="infiniteScroll(condominios, condominiosDisplayed)" infinite-scroll-distance='0.5' infinite-scroll-container='".condominioScroll"'>
+                            <div ng-repeat="condominio in condominiosDisplayed track by condominio.SqCondominio">
+                                <md-checkbox ng-model="condominio.checked"
+                                             ng-checked="imovel.SqCondominio == condominio.SqCondominio"
+                                             ng-change="atualizaCondominio($index, condominios)">
+                                    {{condominio.NmCondominio}}
+                                </md-checkbox>
+                            </div>
+                        </div>
+                    </md-content>
+                </div>
+            </div>
+        </md-content>
+
+        <md-content ng-if="currentNavIndex == 7" class="md-padding" ng-swipe-right="previousTab()" ng-swipe-left="nextTab()">
+            <div class="box box-info">
+                <div class="box-header with-border">
+                    <h3 class="box-title">Seção</h3>
+                </div>
+                <div class="box-body">
+                    <md-content layout-padding class="secaoScroll">
+                        <div infinite-scroll="infiniteScroll(secoes, secoesDisplayed)" infinite-scroll-distance='0.5' infinite-scroll-container='".secaoScroll"'>
+                            <div ng-repeat="secao in secoesDisplayed track by secao.SqSecao">
+                                <md-checkbox ng-model="secao.checked"
+                                             ng-checked="imovel.SqSecao == secao.SqSecao"
+                                             ng-change="atualizaSecao($index, secoes)">
+                                    {{secao.NmSecao}}
+                                </md-checkbox>
+                            </div>
+                        </div>
+                    </md-content>
+                </div>
+            </div>
+        </md-content>
+
+        <md-content ng-if="currentNavIndex == 8" class="md-padding" ng-swipe-right="previousTab()" ng-swipe-left="nextTab()">
+            <div class="box box-info">
+                <div class="box-header with-border">
+                    <h3 class="box-title">Face</h3>
+                </div>
+                <div class="box-body">
+                    <md-content layout-padding class="faceScroll">
+                        <div infinite-scroll="infiniteScroll(faces, facesDisplayed)" infinite-scroll-distance='0.5' infinite-scroll-container='".faceScroll"'>
+                            <div ng-repeat="face in facesDisplayed track by face.SqFace">
+                                <md-checkbox ng-model="face.checked"
+                                             ng-checked="imovel.SqFace == face.SqFace"
+                                             ng-change="atualizaFace($index, faces)">
+                                    {{face.NuFace}}
+                                </md-checkbox>
+                            </div>
+                        </div>
+                    </md-content>
+                </div>
+            </div>
+        </md-content>
+
+        <md-content ng-if="currentNavIndex == 9" class="md-padding" ng-swipe-right="previousTab()" ng-swipe-left="nextTab()">
+            <div class="box box-info">
+                <div class="box-header with-border">
+                    <h3 class="box-title">Loteamento</h3>
+                </div>
+                <div class="box-body">
+                    <md-content layout-padding class="loteamentoScroll">
+                        <div infinite-scroll="infiniteScroll(loteamentos, loteamentosDisplayed)" infinite-scroll-distance='0.5' infinite-scroll-container='".loteamentoScroll"'>
+                            <div ng-repeat="loteamento in loteamentosDisplayed track by loteamento.SqLoteamento">
+                                <md-checkbox ng-model="loteamento.checked"
+                                             ng-checked="imovel.SqLoteamento == loteamento.SqLoteamento"
+                                             ng-change="atualizaLoteamento($index, loteamentos)">
+                                    {{loteamento.NmLoteamento}}
+                                </md-checkbox>
+                            </div>
+                        </div>
+                    </md-content>
+                </div>
+            </div>
+        </md-content>
+
+        <md-content ng-if="currentNavIndex == 10" class="md-padding" ng-swipe-right="previousTab()" ng-swipe-left="nextTab()">
+            <div class="box box-info">
+                <div class="box-header with-border">
+                    <h3 class="box-title">Localização do Imóvel</h3>
+                </div>
+                <div class="box-body">
+                    <md-content layout-padding>
+                        <form role="form" name="localizacaoForm">
+                            <md-input-container class="md-block">
+                                <label>Bairro</label>
+                                <input type="text" required name="NmBairro" ng-model="logradouro.NmBairro" value="{{logradouro.NmBairro}}" disabled />
+                                <div ng-messages="localizacaoForm.NmBairro.$error">
+                                    <div ng-message="required">Campo Obrigatório.</div>
+                                </div>
+                            </md-input-container>
+                            <md-input-container class="md-block">
+                                <label>Logradouro</label>
+                                <input type="text" required name="NmLogradouro" ng-model="logradouro.NmLogradouro" value="{{logradouro.NmLogradouro}}" disabled />
+                                <div ng-messages="localizacaoForm.NmLogradouro.$error">
+                                    <div ng-message="required">Campo Obrigatório.</div>
+                                </div>
+                            </md-input-container>
+                            <div layout="row">
+                                <md-input-container flex="50">
+                                    <label>Lote</label>
+                                    <input type="number" name="NuLote" ng-model="imovel.NuLote" />
+                                </md-input-container>
+                                <md-input-container flex="50">
+                                    <label>Unidade</label>
+                                    <input type="number" name="NuUnidade" ng-model="imovel.NuUnidade" />
+                                </md-input-container>
+                            </div>
+                            <div layout="row">
+                                <md-input-container flex="50">
+                                    <label>Número do Imóvel</label>
+                                    <input required type="text" name="NuLogradouro" ng-model="imovel.NuLogradouro" />
+                                    <div ng-messages="localizacaoForm.NuLogradouro.$error" role="alert">
+                                        <div ng-message-exp="['required']">
+                                            O campo Número do Imóvel é obrigatório
+                                        </div>
+                                    </div>
+                                </md-input-container>
+                                <md-input-container flex="50">
+                                    <label>Bloco</label>
+                                    <input type="text" name="NmBloco" ng-model="imovel.NmBloco" />
+                                </md-input-container>
+                            </div>
+
+                            <div layout="row">
+                                <md-input-container flex="50">
+                                    <label>Apartamento</label>
+                                    <input type="text" name="NuApartamento" ng-model="imovel.NuApartamento" />
+                                </md-input-container>
+                                <md-input-container flex="50">
+                                    <label>Setor Logradouro</label>
+                                    <input type="text" name="NuLotelogradouro" ng-model="imovel.NuSetorlogradouro" />
+                                </md-input-container>
+                            </div>
+
+                            <div layout="row">
+                                <md-input-container flex="50">
+                                    <label>Quadra Logradouro</label>
+                                    <input type="text" name="NuSetorlogradouro" ng-model="imovel.NuQuadralogradouro" />
+                                </md-input-container>
+                                <md-input-container flex="50">
+                                    <label>Lote Logradouro</label>
+                                    <input type="text" name="NuQuadralogradouro" ng-model="imovel.NuLotelogradouro" />
+                                </md-input-container>
+                            </div>
+
+                            <md-input-container class="md-block">
+                                <label>Complemento</label>
+                                <input type="text" name="NmComplemento" maxlength="120" ng-model="imovel.DsComplemento" value="{{imovel.DsComplemento}}">
+                            </md-input-container>
+                        </form>
+                    </md-content>
+                </div>
+            </div>
+        </md-content>
+
+        <md-content ng-if="currentNavIndex == 11" class="md-padding" ng-swipe-right="previousTab()" ng-swipe-left="nextTab()">
+            <div class="box box-info">
+                <div class="box-header with-border">
+                    <h3 class="box-title">Endereço de Correspondência</h3>
+                </div>
+                <div class="box-body">
+                    <md-content layout-padding>
+                        <form role="form" name="correspondenciaForm">
+                            <md-input-container class="md-block">
+                                <label>País</label>
+                                <md-select ng-model="imovel.CdPais" data-md-container-class="selectSelectHeader" md-on-open="obterPaises()" ng-change="verificaPaisCorrespondenciaSelecionado()">
+                                    <md-option ng-repeat="pais in paises" ng-value="pais.CdPais">
+                                        {{pais.NmPais}}
+                                    </md-option>
+                                </md-select>
+                            </md-input-container>
+                            <div layout="row">
+                                <md-input-container flex="30">
+                                    <label>Estado</label>
+                                    <md-select ng-disabled="imovel.CdPais != 76" ng-model="municipioCorrespondencia.SgUf" ng-change="verificaEstadoCorrespondenciaSelecionado()">
+                                        <!--<md-option><em>- Selecione -</em></md-option>-->
+                                        <md-option ng-repeat="estado in estados" ng-value="estado.SgUf">
+                                            {{estado.SgUf}}
+                                        </md-option>
+                                    </md-select>
+                                </md-input-container>
+                                <md-input-container flex="70">
+                                    <label>Município</label>
+                                    <md-select ng-disabled="imovel.CdPais != 76" ng-model="imovel.CdMunicipio" md-on-open="obterMunicipiosCorrespondencia(municipioCorrespondencia.SgUf)" data-md-container-class="selectSelectHeader">
+                                        <md-option ng-repeat="municipio in municipiosCorrespondencia" ng-value="municipio.CdMunicipio">
+                                            {{municipio.NmMunicipio}}
+                                        </md-option>
+                                    </md-select>
+                                </md-input-container>
+                            </div>
+                            <md-input-container class="md-block">
+                                <label>Bairro</label>
+                                <input type="text" name="DsBairrocorrespondencia" ng-model="imovel.DsBairrocorrespondencia" />
+                            </md-input-container>
+                            <md-input-container class="md-block">
+                                <label>Logradouro</label>
+                                <input type="text" name="DsLogradourocorrespondencia" ng-model="imovel.DsLogradourocorrespondencia" />
+                            </md-input-container>
+                            <div layout="row">
+                                <md-input-container flex="50">
+                                    <label>Número</label>
+                                    <input type="text" name="NuLogradourocorrespondencia" ng-model="imovel.NuLogradourocorrespondencia" />
+                                </md-input-container>
+                                <md-input-container flex="50">
+                                    <label>CEP</label>
+                                    <input type="text" name="NuCepcorrespondencia" ng-model="imovel.NuCepcorrespondencia" ta-cep />
+                                </md-input-container>
+                            </div>
+                            <md-input-container class="md-block">
+                                <label>Complemento</label>
+                                <input type="text" name="DsComplementocorrespondencia" maxlength="120" ng-model="imovel.DsComplementocorrespondencia">
+                            </md-input-container>
+
+                        </form>
+                    </md-content>
+                </div>
+            </div>
+        </md-content>
+
+        <md-content ng-if="currentNavIndex == 12" class="md-padding" ng-swipe-right="previousTab()" ng-swipe-left="nextTab()">
+            <div class="box box-info">
+                <div class="box-header with-border">
+                    <h3 class="box-title">Dados da Escritura</h3>
+                </div>
+                <div class="box-body">
+                    <md-content layout-padding>
+                        <form role="form" name="escrituraForm">
+                            <md-input-container class="md-block" style="margin-bottom: 25px;">
+                                <label>Cartório</label>
+                                <md-select ng-model="imovel.SqCartorio" data-md-container-class="selectSelectHeader">
+                                    <md-option ng-repeat="cartorio in cartorios" ng-value="cartorio.SqCartorio">
+                                        {{cartorio.NmCartorio}}
+                                    </md-option>
+                                </md-select>
+                            </md-input-container>
+                            <div layout="row">
+                                <md-input-container flex="65" style="margin-left: -20px;">
+                                    <label>Escriturado</label>
+                                    <md-datepicker ng-model="imovel.DtEscritura" name="DtEscritura" md-min-date="minDate" md-max-date="maxDate"></md-datepicker>
+                                    <div ng-messages="escrituraForm.DtEscritura.$error">
+                                        <div ng-message="valid">Use um formato de data válido</div>
+                                        <div ng-message="mindate">Data inválida! Mínima exigida é {{minDate | date:"dd/MM/yyyy"}}</div>
+                                        <div ng-message="maxdate">Data inválida! Máxima exigida é {{maxDate | date:"dd/MM/yyyy"}}</div>
+                                    </div>
+                                </md-input-container>
+
+                                <md-input-container flex="40">
+                                    <label>Nº Folha</label>
+                                    <input type="number" name="NuFolhalivroregistro" ng-model="imovel.NuFolhalivroregistro">
+                                </md-input-container>
+                            </div>
+
+                            <div layout="row">
+                                <md-input-container flex="50">
+                                    <label>Nº Registro</label>
+                                    <input type="text" name="NuEscritura" ng-model="imovel.NuEscritura" />
+                                </md-input-container>
+                                <md-input-container flex="50">
+                                    <label>Nº Livro</label>
+                                    <input type="text" name="NuLivroregistro" ng-model="imovel.NuLivroregistro" />
+                                </md-input-container>
+                            </div>
+
+                        </form>
+                    </md-content>
+                </div>
+            </div>
+        </md-content>
+
+        <md-content ng-repeat="tipoFator in tiposFatoresTab" ng-if="currentNavIndex == tipoFator.value" class="md-padding" ng-swipe-right="previousTab()" ng-swipe-left="nextTab()">
+            <div class="box box-info">
+                <div class="box-header with-border">
+                    <h3 class="box-title">{{tipoFator.NmTipofator}}</h3>
+                </div>
+                <div class="box-body">
+                    <md-content layout-padding>
+                        <div ng-repeat="fator in fatores = obterFatoresPorTipo(tipoFator.SqTipofator)">
+                            <md-checkbox ng-model="fator.checked" ng-checked="verificaFatorSelecionado(fator.SqTipofator, fator.SqFator)"
+                                         ng-change="updateSelection($index, fatores)">
+                                {{fator.NmFator}}
+                            </md-checkbox>
+                        </div>
+                    </md-content>
+                </div>
+            </div>
+        </md-content>
+
+        <md-content ng-if="currentNavIndex == (qtdAbasIniciais + tiposFatoresTab.length + 1)" class="md-padding" ng-swipe-right="previousTab()" ng-swipe-left="nextTab()">
+            <div class="box box-info">
+                <div class="box-header with-border">
+                    <h3 class="box-title">Dimensões do Imóvel</h3>
+                </div>
+                <div class="box-body">
+                    <md-input-container flex="50">
+                        <label>Área Unidade</label>
+                        <input type="number" name="VlAreaunidade" ng-model="imovel.VlAreaunidade" />
+                    </md-input-container>
+                    <table class="table table-striped">
+                        <tr>
+                            <th style="font-size:12px;">Descrição</th>
+                            <th style="font-size:12px;">Área do Terreno (m²)</th>
+                            <th style="font-size:12px;">Área Construída (m²)</th>
+                            <th></th>
+                        </tr>
+                        <tr align="center" ng-repeat="area in areasImovel track by $index">
+                            <td>{{area.NmAreaimovel}}</td>
+                            <td>{{area.VlTotalterreno}}</td>
+                            <td>{{area.VlTotalconstruido}}</td>
+                            <td>
+                                <md-menu md-offset="0 -7">
+                                    <md-button aria-label="menu" class="md-icon-button" ng-click="$mdMenu.open($event)">
+                                        <ng-md-icon class="iconGrey" icon="more_horiz" size="20"></ng-md-icon>
+                                    </md-button>
+                                    <md-menu-content width="2">
+                                        <md-menu-item>
+                                            <md-button ng-click="panelAreaImovel(area, 'editar')"> <span md-menu-align-target>Editar</span></md-button>
+                                        </md-menu-item>
+                                        <md-menu-item>
+                                            <md-button ng-click="removerAreaImovel($ev, area)"> <span md-menu-align-target>Excluir</span></md-button>
+                                        </md-menu-item>
+                                    </md-menu-content>
+                                </md-menu>
+                            </td>
+
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </md-content>
+
+        <md-content ng-if="currentNavIndex == (qtdAbasIniciais + tiposFatoresTab.length + 2)" class="md-padding" ng-swipe-right="previousTab()" ng-swipe-left="nextTab()">
+            <div class="box box-info">
+                <div class="box-header with-border">
+                    <h3 class="box-title">Fotos do Imóvel</h3>
+                </div>
+                <div class="box-body">
+
+                    <form role="form" name="fotosForm">
+                        <ta-upload-photos images="images" available="availableQuantity"></ta-upload-photos>
+                    </form>
+                </div>
+            </div>
+        </md-content>
+
+        <md-content ng-if="(currentNavIndex == (qtdAbasIniciais + tiposFatoresTab.length + 3))" class="md-padding" ng-swipe-right="previousTab()" ng-swipe-left="nextTab()">
+            <div class="box box-info">
+                <div class="box-header with-border" style="display: flex;">
+                    <h3 class="box-title">Dados do Entrevistado</h3>
+
+                    <md-switch style="margin-left: auto; margin-top: -5px; font-size: large;" name="flIncluirEntrevistado" ng-model="entrevistado.flIncluirEntrevistado" aria-label="Incluir entrevistado">
+                        Incluir
+                    </md-switch>
+                </div>
+                <div class="box-body">
+                    <md-content layout-padding>
+                        <form role="form" name="entrevistadoForm">
+                            <md-input-container class="md-block">
+                                <label>Nome</label>
+                                <input ng-disabled="!(entrevistado.flIncluirEntrevistado)" type="text" name="NmEntrevistado" ng-model="entrevistado.NmEntrevistado" required />
+                            </md-input-container>
+                            <md-input-container class="md-block">
+                                <label>CPF</label>
+                                <input ng-disabled="!(entrevistado.flIncluirEntrevistado)" type="tel" name="NuCpfentrevistado" ng-model="entrevistado.NuCpfentrevistado" ta-cpf-cnpj option="cpf">
+                                <div ng-messages="entrevistadoForm.NuCpfentrevistado.$error">
+                                    <div ng-message="cpfInvalid">CPF inválido!</div>
+                                </div>
+                            </md-input-container>
+                            <md-input-container class="md-block">
+                                <label>RG</label>
+                                <input ng-disabled="!(entrevistado.flIncluirEntrevistado)" type="text" name="NuRgentrevistado" maxlength="20" ng-model="entrevistado.NuRgentrevistado" />
+                            </md-input-container>
+                            <md-input-container class="md-block">
+                                <label>Contato</label>
+                                <input ng-disabled="!(entrevistado.flIncluirEntrevistado)" type="text" name="DsContatoentrevistado" maxlength="200" ng-model="entrevistado.DsContatoentrevistado">
+                            </md-input-container>
+                            <md-input-container class="md-block">
+                                <label>Vínculo</label>
+                                <input ng-disabled="!(entrevistado.flIncluirEntrevistado)" type="text" name="DsVinculoentrevistado" maxlength="80" ng-model="entrevistado.DsVinculoentrevistado">
+                            </md-input-container>
+                        </form>
+                    </md-content>
+                </div>
+            </div>
+        </md-content>
+
+        <md-content ng-show="currentNavIndex == (qtdAbasIniciais + tiposFatoresTab.length + qtdAbasFinais)" class="md-padding" ng-swipe-right="previousTab()" ng-swipe-left="nextTab()">
+            <div class="box box-warning">
+                <md-progress-linear class="md-warn" md-mode="query" ng-disabled="!loadingLocation"></md-progress-linear>
+                <div class="box-header with-border">
+                    <h3 class="box-title">Finalizar Cadastro do Imóvel</h3>
+                </div>
+                <div class="box-body">
+
+                    <form role="form" name="finalizarForm">
+                        <md-content layout-padding>
+                            <md-input-container class="md-block">
+                                <label>Tipo Imóvel</label>
+                                <input name="NmTipoimovel" type="text" ng-model="tipoImovel.NmTipoimovel" disabled required />
+                            </md-input-container>
+                            <md-input-container class="md-block">
+                                <label>Imóvel</label>
+                                <input type="text" ng-model="imovel.NuPublico" disabled />
+                            </md-input-container>
+                            <md-input-container class="md-block">
+                                <label>Número do Imóvel</label>
+                                <input name="NuLogradouro" type="text" ng-model="imovel.NuLogradouro" disabled required />
+                            </md-input-container>
+                            <md-input-container class="md-block">
+                                <label>Contribuinte</label>
+                                <input name="NmContribuinte" type="text" ng-model="contribuinte.NmContribuinte" disabled required />
+                            </md-input-container>
+                            <md-input-container ng-if="entrevistado.flIncluirEntrevistado" class="md-block">
+                                <label>Entrevistado</label>
+                                <input name="NmEntrevistado" type="text" ng-model="entrevistado.NmEntrevistado" disabled required />
+                            </md-input-container>
+                            <md-input-container class="md-block">
+                                <label>Observação</label>
+                                <textarea name="DsObservacao" ng-model="imovel.DsObservacao" md-maxlength="500" rows="3" md-no-autogrow md-select-on-focus></textarea>
+                            </md-input-container>
+                            <md-input-container class="md-block">
+                                <div layout="row">
+                                    <md-checkbox style="margin-right:15px;" md-no-ink aria-label="coordenadas imovel" ng-model="imovel.cbCoordenadas" ng-change="obterLocalizacao()" class="md-primary">
+                                        Armazenar localização do imóvel
+                                    </md-checkbox>
+                                    <ng-md-icon ng-if="imovel.NuLatitude && imovel.NuLongitude" ng-click="initMap(imovel.NuLatitude, imovel.NuLongitude)" class="iconBlue" icon="place" size="40"></ng-md-icon>
+                                </div>
+                            </md-input-container>
+                        </md-content>
+                    </form>
+                </div>
+            </div>
+        </md-content>
+    </md-content>
+    <div>
+        <md-button ng-disabled="loadingLocation || (entrevistado.flIncluirEntrevistado && finalizarForm.NmEntrevistado.$invalid) || finalizarForm.DsObservacao.$invalid || contribuinteForm.NuCpfcnpjcontribuinte.$invalid || contribuinteResponsavelForm.NuCpfcnpjcontribuinte.$invalid || finalizarForm.NmTipoimovel.$invalid || finalizarForm.NuLogradouro.$invalid || finalizarForm.NmContribuinte.$invalid" id="btnFABSalvar"
+                   ng-show="currentNavIndex == (qtdAbasIniciais + tiposFatoresTab.length + qtdAbasFinais)" 
+                   class="md-fab md-fab-bottom-right" ng-click="salvarImovel($ev, 'editar')" aria-label="salvar">
+            <ng-md-icon icon="save" size="30"></ng-md-icon>
+        </md-button>
+        <md-button id="areaImovelFAB" ng-show="currentNavIndex == (1 + tiposFatoresTab.length + qtdAbasIniciais)" ng-click="panelAreaImovel(area, 'incluir')" class="md-fab md-fab-bottom-right" aria-label="adicionar área imovel">
+            <ng-md-icon class="iconWhite" icon="add" size="26"></ng-md-icon>
+        </md-button>
+
+        <md-fab-speed-dial id="btnFAB" style="z-index:821;" ng-show="currentNavIndex == 1" md-direction="up" class="md-fab md-fab-bottom-right" ng-class="'md-scale'">
+            <md-fab-trigger>
+                <md-button aria-label="menu" class="md-fab md-warn">
+                    <ng-md-icon class="iconWhite" icon="menu" size="30"></ng-md-icon>
+                </md-button>
+            </md-fab-trigger>
+
+            <md-fab-actions>
+                <md-button aria-label="Adicionar" data-ng-click="cadastrarContribuinte(0)" ng-animate="'animate-enter'" class="md-fab md-raised md-mini">
+                    <ng-md-icon class="iconBlue" icon="person_add" size="26"></ng-md-icon>
+                </md-button>
+
+                <md-button aria-label="Pesquisar" data-ng-click="pesquisarContribuinte(0)" class="md-fab md-raised md-mini">
+                    <ng-md-icon class="iconRed" icon="search" size="26"></ng-md-icon>
+                </md-button>
+            </md-fab-actions>
+        </md-fab-speed-dial>
+
+        <md-fab-speed-dial id="btnFAB" style="z-index:821;" ng-show="currentNavIndex == 2" md-direction="up" class="md-fab md-fab-bottom-right" ng-class="'md-scale'">
+            <md-fab-trigger>
+                <md-button aria-label="menu" class="md-fab md-warn">
+                    <ng-md-icon class="iconWhite" icon="menu" size="30"></ng-md-icon>
+                </md-button>
+            </md-fab-trigger>
+
+            <md-fab-actions>
+                <md-button aria-label="Adicionar" data-ng-click="cadastrarContribuinte(1)" ng-animate="'animate-enter'" class="md-fab md-raised md-mini">
+                    <ng-md-icon class="iconBlue" icon="person_add" size="26"></ng-md-icon>
+                </md-button>
+
+                <md-button aria-label="Pesquisar" data-ng-click="pesquisarContribuinte(1)" class="md-fab md-raised md-mini">
+                    <ng-md-icon class="iconRed" icon="search" size="26"></ng-md-icon>
+                </md-button>
+            </md-fab-actions>
+        </md-fab-speed-dial>
+    </div>
+</div>
+<div data-panels="true"></div>

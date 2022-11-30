@@ -1,0 +1,21 @@
+﻿<div layout="row" ng-controller="configCtrl">
+    <md-sidenav class="md-sidenav-right md-whiteframe-4dp marginTopSideNav" md-component-id='right'>
+
+        <md-toolbar style="background-color:#6d67d3;">
+            <h1 class="md-toolbar-tools">Configurações</h1>
+        </md-toolbar>
+        <md-content layout-padding>
+            <form>
+                <p style="font-weight: bold; font-size: 16px;">Relacionar imóveis por: </p>
+                <md-radio-group ng-model="$root.parametroAgente.RelImoveis" layout="row" ng-change="atualizaRelImoveis()" required>
+                    <md-radio-button value="1" class="md-primary" ng-disabled="$root.disableBairroLogradouro">Bairro e Logradouro</md-radio-button>
+                    <md-radio-button value="2" class="md-primary" ng-disabled="$root.disableSetorQuadra">Setor e Quadra</md-radio-button>
+                </md-radio-group>
+            </form>
+            <md-button ng-click="close()" style="margin-top: 20px;" class="md-primary">
+                Fechar
+            </md-button>
+        </md-content>
+
+    </md-sidenav>
+</div>

@@ -1,0 +1,33 @@
+﻿﻿<div style="text-align:center;">
+    <a  ng-if="!enableSelection" ng-click="takePicture(1)" style="margin-right: 200px;">
+        <ng-md-icon class="iconBlue" icon="add_a_photo" size="35"></ng-md-icon>
+    </a>
+    <a  ng-if="!enableSelection" ng-click="takePicture(2)">
+        <ng-md-icon class="iconBlue" icon="photo_library" size="35"></ng-md-icon>
+    </a>
+     <a ng-if="enableSelection" ng-click="removePictures()">
+         <ng-md-icon ng-class="{'iconRed':totalSelected > 0, 'iconDisabled': totalSelected == 0}" icon="delete" size="35"></ng-md-icon>
+     </a>
+</div>
+
+<div>
+    <div class="row">
+        <div style="width:70%;float:left;display:inline-block;margin-left:20px;">
+            <h5 class="timeline-header" ng-if="(images.length > 0) && (!enableSelection)"><a> {{images.length}} foto(s) adicionada(s)</a></h5>
+            <h5 class="timeline-header" ng-if="images == undefined || images.length == 0"><a> Nenhuma foto adicionada</a></h5>
+            <h5 class="timeline-header" ng-if="enableSelection"><a> {{totalSelected}} foto(s) selecionada(s)</a></h5>
+        </div>
+        <div>
+            <h5 class="timeline-header">
+               <a ng-if="images.length > 0" ng-click="selectPhotos()">
+                 {{option}}
+               </a>
+            </h5>
+        </div>
+    </div>
+
+    <div style="position: relative; width: 156px; height: 156px; float: left; margin-left: 10px;" ng-repeat="image in images">
+        <div ng-click="checkOption(image)" ng-class="{ 'selectedPhoto': enableSelection && image.selected}" style="width: 150px; height: 150px; background-position: center; background-image: url({{image.src}})">
+        </div>
+    </div>
+</div>

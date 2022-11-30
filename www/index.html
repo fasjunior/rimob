@@ -1,0 +1,320 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Rimob - Recadastramento Imobiliário</title>
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <!-- Bootstrap 3.3.6 -->
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="plugins/font-awesome-4.7.0/css/font-awesome.min.css">
+    <!-- Ionicons -->
+    <link rel="stylesheet" href="plugins/ionicons-2.0.1/css/ionicons.min.css">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="dist/css/AdminLTE.min.css">
+    <!-- AdminLTE Skins. Choose a skin from the css/skins
+         folder instead of downloading all of them to reduce the load. -->
+    <link rel="stylesheet" href="dist/css/skins/_all-skins.min.css">
+    <!-- Angular Material -->
+    <link href="angular/css/angular-material.min-1.1.10.css" rel="stylesheet">
+
+    <!-- Angular Material Panels -->
+    <link href="angular/css/angular.panels.css" rel="stylesheet">
+
+    <!-- Angular Animate -->
+    <link href="angular/css/ng-animation.css" rel="stylesheet">
+
+    <!--Material Desing Icon-->
+    <link href="plugins/material-design-icons/iconfont/material-icons.css" rel="stylesheet" />
+
+    <!-- Default Style -->
+    <link href="rimob/global/css/default.style.css" rel="stylesheet">
+
+</head>
+<body id="body" class="hold-transition skin-purple-light sidebar-mini" ng-app="Rimob">
+    <div id="mainContainer" class="wrapper" ng-controller="loginCtrl">
+        <header class="main-header">
+            <div ng-if="$root.parametroAgente">
+                <!-- Logo -->
+                <a href="#/" class="logo">
+                    <!-- mini logo for sidebar mini 50x50 pixels -->
+                    <span class="logo-mini"><b>R</b>im</span>
+                    <!-- logo for regular state and mobile devices -->
+                    <span class="logo-lg"><b>Rimob</b></span>
+                </a>
+                <!-- Header Navbar: style can be found in header.less -->
+                <nav id="nav" class="navbar navbar-static-top">
+                    <!-- Sidebar toggle button-->
+                    <a href="javascript:void(0);" class="sidebar-toggle" data-toggle="offcanvas" role="button">
+                        <span class="sr-only">Navegação</span>
+                    </a>
+                    <div class="navbar-custom-menu" ng-controller="notificacaoCtrl">
+                        <ul class="nav navbar-nav">
+                            <!-- Tasks: style can be found in dropdown.less -->
+                            <li class="dropdown tasks-menu" ng-controller="showBackEndImportCtrl">
+                                <a ng-click="showBackEndImport($event)" class="dropdown-toggle" data-toggle="dropdown">
+                                    <i class="fa fa-cloud-download"></i>
+                                    <span class="label label-danger"></span>
+                                </a>
+                            </li>
+                            <!-- Messages: style can be found in dropdown.less-->
+                            <li class="dropdown messages-menu">
+                                <a ng-click="atualizaNotificacao(3)" class="dropdown-toggle" data-toggle="dropdown">
+                                    <i class="fa fa-envelope-o"></i>
+                                    <span class="label label-success" ng-bind="$root.qtMensagensNaoLidas"></span>
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li class="header" ng-if="$root.qtMensagens == 1">Você possui {{$root.qtMensagens}} mensagem</li>
+                                    <li class="header" ng-if="$root.qtMensagens > 1">Você possui {{$root.qtMensagens}} mensagens</li>
+                                    <li>
+                                        <!-- inner menu: contains the actual data -->
+                                        <ul class="menu">
+                                            <li ng-if="$root.mensagens == undefined || $root.mensagens == 0">
+                                                <a>
+                                                    <div class="pull-left">
+                                                        <ng-md-icon class="iconGrey" icon="comment" size="20"></ng-md-icon>
+                                                    </div>
+                                                    <h4>
+                                                        Nenhuma mensagem!
+                                                    </h4>
+                                                </a>
+                                            </li>
+                                            <li ng-repeat="mensagem in $root.mensagens">
+                                                <!-- start message -->
+                                                <a href="#/mensagem/{{mensagem.SqNotificacao}}">
+                                                    <div class="pull-left">
+                                                        <!--<img src="dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">-->
+                                                        <ng-md-icon class="iconGrey" icon="comment" size="20"></ng-md-icon>
+                                                    </div>
+                                                    <h4>
+                                                        {{mensagem.DsTitulo | ellipsis: 30}}
+                                                        <small><i class="fa fa-clock-o"></i> {{mensagem.DtNotificacao}}</small>
+                                                    </h4>
+                                                    <p>{{mensagem.DsConteudo | ellipsis: 36}}</p>
+                                                </a>
+                                            </li>
+                                            <!-- end message -->
+                                        </ul>
+                                    </li>
+                                    <li ng-hide="$root.mensagens == undefined || $root.mensagens == 0" class="footer"><a href="#/mensagem">Ver todas as mensagens</a></li>
+                                </ul>
+                            </li>
+                            <!-- Notifications: style can be found in dropdown.less -->
+                            <li class="dropdown notifications-menu">
+                                <a ng-click="atualizaNotificacao(1)" class="dropdown-toggle" data-toggle="dropdown">
+                                    <i class="fa fa-bell-o"></i>
+                                    <span class="label label-danger" ng-bind="$root.qtAlertasNaoLidos"></span>
+                                </a>
+                                <ul class="dropdown-menu" ng-if="$root.qtAlertas == undefined || $root.qtAlertas == 0">
+                                    <li>
+                                        <ul class="menu">
+                                            <li>
+                                                <a>
+                                                    <i class="fa fa-warning"></i> Nenhum alerta!
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li class="footer"><a></a></li>
+                                </ul>
+                                <ul class="dropdown-menu" ng-if="$root.qtAlertas > 0">
+                                    <li class="header" ng-if="$root.qtAlertas == 1">Você possui {{$root.qtAlertas}} notificação</li>
+                                    <li class="header" ng-if="$root.qtAlertas > 1">Você possui {{$root.qtAlertas}} notificações</li>
+                                    <li>
+                                        <ul class="menu">
+                                            <li ng-repeat="alerta in $root.alertas">
+                                                <a ng-href="{{alerta.SqNotificacao == 1 ? '#/importacao':'#/exportacao'}}">
+                                                    <i class="fa fa-times-circle text-red"></i> {{alerta.DsConteudo}}
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li class="footer"><a></a></li>
+                                </ul>
+                            </li>
+
+                            <!-- User Account: style can be found in dropdown.less -->
+                            <li class="dropdown user user-menu">
+                                <a class="dropdown-toggle" data-toggle="dropdown" style="margin-bottom:-10px;">
+                                    <!--<img src="dist/img/user2-160x160.jpg" class="user-image" alt="User Image">-->
+                                    <ng-md-icon class="iconWhite" icon="account_circle" size="23"></ng-md-icon>
+                                    <span class="hidden-xs" ng-bind="$root.parametroAgente.NmAgenteimobiliario"></span>
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <!-- User image -->
+                                    <li class="user-header">
+                                        <!--<img src="dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">-->
+                                        <ng-md-icon class="iconWhite" icon="account_circle" size="50"></ng-md-icon>
+                                        <p>
+                                            {{$root.parametroAgente.NmAgenteimobiliario}}
+                                            <small>{{$root.parametroAgente.NmUnidgestora}}</small>
+                                        </p>
+                                    </li>
+                                    <!-- Menu Body -->
+                                    <!-- Menu Footer-->
+                                    <li class="user-footer">
+                                        <div class="pull-left">
+                                            <a href="#/usuario" class="btn btn-default btn-flat">Conta</a>
+                                        </div>
+                                        <div class="pull-right">
+                                            <a ng-click="logoutAgente()" class="btn btn-default btn-flat">Finalizar Sessão</a>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li ng-controller="configCtrl">
+                                <a ng-click="openSideNav()" data-toggle="control-sidebar"><i class="fa fa-gears"></i></a>
+                            </li>
+                        </ul>
+                    </div>
+                </nav>
+            </div>
+
+        </header>
+        <!-- Left side column. contains the logo and sidebar -->
+        <aside ng-if="$root.parametroAgente" class="main-sidebar" ng-include="'rimob/global/views/sidebarmenu.html'"></aside>
+        <!-- Content Wrapper. Contains page content -->
+        <div class="content-wrapper">
+            <div layout="row" layout-align="center center" ng-show="$root.loading">
+                <md-progress-circular class="mdProgress" md-mode="indeterminate"></md-progress-circular>
+            </div>
+            <div ng-cloak ng-if="!$root.loading">
+                <div ng-view ng-class="{ 'slide-right': $root.slideRight }" ng-swipe-right="controlSideBarMenu(1)" ng-swipe-left="controlSideBarMenu(0)"></div>
+            </div>
+            
+            <!-- SideNav Config -->
+            <div ng-include="'config/views/sidenav-config.html'"></div>
+            <!-- SideNav Config -->
+
+        </div>
+
+        <!-- /.content-wrapper -->
+        <footer ng-if="$root.parametroAgente" class="main-footer">
+            <strong>Copyright &copy; <a href="http://www.3tecnos.com.br" target="_blank">3Tecnos Tecnologia</a>.</strong> <b>Versão</b> <span ng-bind="$root.version"></span>
+        </footer>
+    </div>
+    <script>
+        document.addEventListener('deviceready', function () {
+            // Enable to debug issues.
+            // window.plugins.OneSignal.setLogLevel({logLevel: 4, visualLevel: 4});
+
+            var notificationOpenedCallback = function (jsonData) {
+                console.log('notificationOpenedCallback: ' + JSON.stringify(jsonData));
+            };
+
+            window.plugins.OneSignal
+                .startInit("e2d2f65a-5602-4bfa-93a5-f6671448a94d")
+                .handleNotificationOpened(notificationOpenedCallback)
+                .endInit();
+        }, false);
+    </script>
+    <!-- ./wrapper -->
+    <!-- jQuery 2.2.3 -->
+    <script src="plugins/jQuery/jquery-2.2.3.min.js"></script>
+    <!-- jQuery UI 1.11.4 -->
+    <script src="plugins/jQueryUI/jquery-ui.min.js"></script>
+    <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
+    <script>
+        $.widget.bridge('uibutton', $.ui.button);
+    </script>
+    <!-- Bootstrap 3.3.6 -->
+    <script src="bootstrap/js/bootstrap.min.js"></script>
+    <!-- AdminLTE App -->
+    <script src="dist/js/app.js"></script>
+
+
+    <!--Angular JS-->
+    <script src="angular/js/angular.js"></script>
+    <script src="angular/js/angular-route.min.js"></script>
+    <script src="angular/js/angular-animate.min.js"></script>
+    <script src="angular/js/angular.panels.js"></script>
+    <script src="angular/js/angular-swipe.js"></script>
+    <script src="angular/js/angular-messages.min.js"></script>
+
+    <!-- Angular Material -->
+    <script src="angular/js/angular-material-icons.min.js"></script>
+    <script src="angular/js/angular-material.min-1.1.10.js"></script>
+    <script src="angular/js/angular-aria.min.js"></script>
+
+    <script src='cordova.js'></script>
+
+    <!--DbOff-->
+    <script src="lib/ngDbOff/ngDbOff.js"></script>
+
+    <!--DirPagination-->
+    <script src="lib/dirPagination/dirPagination.js"></script>
+
+    <!--Tauro-->
+    <script src="lib/tauro/tauro-utils-extendedmethods.js"></script>
+    <script src="lib/tauro/tauro-utils-filters.js"></script>
+    <script src="lib/tauro/directives/back/back.js"></script>
+    <script src="lib/tauro/directives/cep/cep.js"></script>
+    <script src="lib/tauro/directives/tel/tel.js"></script>
+    <script src="lib/tauro/directives/cpf_cnpj/cpf_cnpj.js"></script>
+    <script src="lib/tauro/directives/findbox/findbox.js"></script>
+    <script src="lib/tauro/directives/uploadphotos/uploadphotos.js"></script>
+    <script src="lib/tauro/filters/cpf_cnpj/cpf_cnpj.filter.js"></script>
+    <script src="lib/tauro/filters/tel/tel.filter.js"></script>
+
+    <!-- Rimob -->
+    <script src="rimob/global/js/app.config.js"></script>
+    <script src="rimob/global/js/app.routes.js"></script>
+    <script src="rimob/global/js/default.controller.js"></script>
+    <script src="rimob/global/js/default.service.js"></script>
+    <script src="rimob/global/js/backend-import.controller.js"></script>
+    <script src="rimob/global/js/backend-import.service.js"></script>
+    <script src="rimob/global/js/backend-export.service.js"></script>
+    <script src="rimob/global/js/backend-export.controller.js"></script>
+    <script src="rimob/bairro/js/bairro.service.js"></script>
+    <script src="rimob/bairro/js/bairro.controller.js"></script>
+    <script src="rimob/logradouro/js/logradouro.service.js"></script>
+    <script src="rimob/logradouro/js/logradouro.controller.js"></script>
+    <script src="rimob/imovel/js/imovel.service.js"></script>
+    <script src="rimob/imovel/js/imovel.controller.js"></script>
+    <script src="rimob/contribuinte/js/contribuinte.service.js"></script>
+    <script src="rimob/municipio/js/municipio.service.js"></script>
+    <script src="rimob/estado/js/estado.service.js"></script>
+    <script src="rimob/tipofator/js/tipofator.service.js"></script>
+    <script src="rimob/fatorimovel/js/fatorimovel.service.js"></script>
+    <script src="rimob/areaimovel/js/areaimovel.service.js"></script>
+    <script src="rimob/tipoimovel/js/tipoimovel.service.js"></script>
+    <script src="rimob/distrito/js/distrito.service.js"></script>
+    <script src="rimob/setor/js/setor.service.js"></script>
+    <script src="rimob/setor/js/setor.controller.js"></script>
+    <script src="rimob/quadra/js/quadra.service.js"></script>
+    <script src="rimob/quadra/js/quadra.controller.js"></script>
+    <script src="rimob/login/js/login.controller.js"></script>
+    <script src="rimob/login/js/login.service.js"></script>
+    <script src="rimob/parametro/js/parametro.service.js"></script>
+    <script src="rimob/areaagente/js/areaagente.service.js"></script>
+    <script src="rimob/exportacao/js/exportacao.service.js"></script>
+    <script src="rimob/exportacao/js/exportacao.controller.js"></script>
+    <script src="rimob/global/js/loading.interceptor.js"></script>
+    <script src="rimob/global/js/error.interceptor.js"></script>
+    <script src="rimob/notificacao/js/notificacao.service.js"></script>
+    <script src="rimob/notificacao/js/notificacao.controller.js"></script>
+    <script src="rimob/importacao/js/importacao.service.js"></script>
+    <script src="rimob/importacao/js/importacao.controller.js"></script>
+    <script src="rimob/usuario/js/usuario.controller.js"></script>
+    <script src="rimob/mensagem/js/mensagem.controller.js"></script>
+    <script src="rimob/fotoimovel/js/fotoimovel.service.js"></script>
+    <script src="rimob/global/js/auth.service.js"></script>
+    <script src="rimob/usuario/js/usuario.service.js"></script>
+    <script src="rimob/global/js/http-request.interceptor.js"></script>
+    <script src="lib/ngInfiniteScroll/ng-infinite-scroll.min.js"></script>
+    <script src="rimob/pais/js/pais.service.js"></script>
+    <script src="lib/moment/moment.js"></script>
+    <script src="rimob/condominio/js/condominio.service.js"></script>
+    <script src="rimob/face/js/face.service.js"></script>
+    <script src="rimob/loteamento/js/loteamento.service.js"></script>
+    <script src="rimob/secao/js/secao.service.js"></script>
+    <script src="rimob/cartorio/js/cartorio.service.js"></script>
+    <script src="rimob/entrevistado/js/entrevistado.service.js"></script>
+
+    <script src="config/js/config.controller.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBBeTDgsdT5to9UgLZdVhoCQJ4XxqFZq90"></script>
+
+</body>
+</html>

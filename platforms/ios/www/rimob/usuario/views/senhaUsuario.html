@@ -1,0 +1,43 @@
+﻿<md-content class="md-padding">
+    <div class="box box-danger">
+        <md-progress-linear class="md-warn" md-mode="query" ng-disabled="!loadingSenha"></md-progress-linear>
+        <div class="box-header with-border">
+            <h3 class="box-title">Alterar senha</h3>
+        </div>
+        <div class="box-body" layout="column" ng-cloak>
+            <form name="senhaForm">
+
+                <md-input-container class="md-block">
+                    <label>Senha Atual</label>
+                    <input required type="password" name="senhaAtual" ng-model="usuario.senhaAtual">
+                    <div ng-messages="senhaForm.senhaAtual.$error">
+                        <div ng-message="required">Campo obrigatório.</div>
+                    </div>
+                </md-input-container>
+
+                <md-input-container class="md-block">
+                    <label>Nova Senha</label>
+                    <input required type="password" name="novaSenha" ng-model="usuario.novaSenha" />
+                    <div ng-messages="senhaForm.novaSenha.$error">
+                        <div ng-message="required">Campo obrigatório.</div>
+                    </div>
+                </md-input-container>
+
+                <md-input-container class="md-block">
+                    <label>Confirme a Nova Senha</label>
+                    <input required type="password" name="novaSenhaConf" ng-model="usuario.novaSenhaConf" />
+                    <div ng-messages="senhaForm.novaSenhaConf.$error">
+                        <div ng-message="required">Campo obrigatório.</div>
+                    </div>
+                </md-input-container>
+
+                <section layout="row" layout-align="center center" layout-wrap>
+                    <md-button ta-back class="md-raised">Voltar</md-button> 
+                    <md-button ng-disabled="senhaForm.$invalid || loadingSenha" class="md-raised md-primary" ng-click="alterarSenha(usuario)">Salvar</md-button>
+                </section>
+            </form>
+        </div>
+
+    </div>
+
+</md-content>

@@ -1,0 +1,49 @@
+﻿<section class="content">
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="box">
+                <div class="box-header">
+                    <h3 class="box-title">Importação</h3>
+                </div>
+                <!-- /.box-header -->
+                <div class="box-body table-responsive no-padding">
+                    <table style="height:50px;" class="table table-hover">
+                        <tr>
+                            <th ng-click="sort('NmTabela')">Tabela
+                                <span class="glyphicon sort-icon" ng-show="sortKey=='NmTabela'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>                            
+                            </th>
+                            <th ng-click="sort('FlImportada')">Recepção
+                                <span class="glyphicon sort-icon" ng-show="sortKey=='FlImportada'" ng-class="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>                            
+                            </th>
+                        </tr>
+                        <tr dir-paginate="tab in tabelasImportacao | orderBy:sortKey:reverse | itemsPerPage:5">
+                            <td>{{tab.NmTabela}}</td>
+                            <td ng-if="tab.FlImportada == 1"><span class="label label-success">Sucesso</span></td>
+                            <td ng-if="tab.FlImportada != 1"><span class="label label-danger">Falha</span></td>
+                        </tr>
+                        <tr ng-if="tabelasImportacao.length == 0">
+                            <td>Nenhuma importação realizada!</td>
+                        </tr>
+                    </table>
+                    <div class="text-center">
+                        <dir-pagination-controls max-size="5"
+                                                 direction-links="true"
+                                                 boundary-links="true">
+                        </dir-pagination-controls>
+                    </div>
+                    
+                </div>
+                
+                <!-- /.box-body -->
+            </div>
+            <!-- /.box -->
+            <section layout="row" layout-align="center center" layout-wrap>
+                <md-button ta-back class="md-raised">Voltar</md-button> 
+                <md-button id="btnPanel" ng-controller="showBackEndImportCtrl" ng-click="showBackEndImport($event);"
+                           class="md-raised md-primary">Importar</md-button>
+            </section>
+
+        </div>
+
+    </div>
+</section>

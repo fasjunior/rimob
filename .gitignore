@@ -1,0 +1,118 @@
+# See http://help.github.com/ignore-files/ for more about ignoring files.
+
+# OSX
+#
+.DS_Store
+
+# compiled output
+out-tsc
+.build
+.plugins
+.serverless
+.tmp
+/tmp
+/debug
+/dist/*
+!/dist/.gitkeep
+!/dist/.vscode
+/dist/.vscode/*
+!/dist/.vscode/settings.json
+
+# dependencies
+node_modules
+
+# IDEs and editors
+.idea
+.project
+.classpath
+.c9/
+*.launch
+.settings/
+*.sublime-workspace
+
+# IDE - VSCode
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+!.vscode/react.code-snippets
+!.vscode/define-new-guard-validation.code-snippets
+
+# misc
+.sass-cache
+connect.lock
+coverage/
+.eslint/
+/migrations.json
+*.log
+.pnpm-store
+dev-debug/
+.node-reports
+
+# System Files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Yarn
+.pnp.*
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/sdks
+!.yarn/versions
+
+# User files
+.env
+.env.local
+.envshell
+.local.env
+.secrets
+.coveralls.yml
+.quokka
+
+# Documentação gerada
+.docs/
+
+# Firebase emulators
+.firebaserc
+firebase.json
+
+###  Mobile - Begin ###
+
+# Xcode
+ios/**/build/
+ios/*.pbxuser
+ios/*!default.pbxuser
+ios/*.mode1v3
+ios/*!default.mode1v3
+ios/*.mode2v3
+ios/*!default.mode2v3
+ios/*.perspectivev3
+ios/*!default.perspectivev3
+ios/*xcuserdata
+ios/*.xccheckout
+ios/*.moved-aside
+ios/*DerivedData
+ios/*.hmap
+ios/*.ipa
+ios/*.xcuserstate
+ios/*project.xcworkspace
+ios/.xcode.env.local
+
+# Android/IntelliJ
+android/**/build/
+android/*.idea
+android/*.gradle
+android/*local.properties
+android/*.iml
+android/*.hprof
+
+# CocoaPods
+ios/Pods/
+
+# Expo
+.expo/
+web-build/

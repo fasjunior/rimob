@@ -1,0 +1,44 @@
+﻿<div ng-init="obterTiposImovel()" ng-cloak>
+    <md-content class="md-padding">
+        <div class="box box-success">
+            <div class="box-header with-border">
+                <h3 class="box-title">Tipo do Imóvel</h3>
+            </div>
+            <div class="box-body">
+                <form role="form" name="tipoImovelForm">
+                    <md-content layout-padding>
+                        <md-radio-group id="radioTipoImovel" required style="padding-left: 30px" ng-model="imovel.SqTipoimovel">
+                            <md-radio-button ng-repeat="tpImovel in tiposImovel" ng-value="tpImovel.SqTipoimovel">{{tpImovel.NmTipoimovel}}</md-radio-button>
+                        </md-radio-group>
+
+                        <!--<div ng-repeat="tpImovel in tiposImovel">
+                            <md-checkbox ng-model="tpImovel.checked" ng-checked="imovel.SqTipoimovel == tpImovel.SqTipoimovel"
+                                         ng-change="updateSelection($index, tiposImovel)">           {{tpImovel.NmTipoimovel}}
+                            </md-checkbox>
+                        </div>-->
+                        
+                        <!--<div ng-repeat="tpImovel in tiposImovel">
+                            <label class="container">                               {{tpImovel.NmTipoimovel}}
+                                <input type="radio" checked="{{imovel.SqTipoimovel == tpImovel.SqTipoimovel}}" name="radio">
+                                <span class="checkmark"></span>
+                            </label>
+                        </div>-->
+                        <!--<p ng-repeat="tpImovel in tiposImovel">
+                            <input required type="radio" id="{{tpImovel.SqTipoimovel}}" ng-checked="imovel.SqTipoimovel == tpImovel.SqTipoimovel" ng-value="tpImovel.SqTipoimovel" name="radio-group">
+                            <label for="{{tpImovel.SqTipoimovel}}">{{tpImovel.NmTipoimovel}}</label>
+                        </p>-->
+
+                        <br>
+                        
+                    </md-content>
+                    
+                    <section layout="row" layout-align="center center" layout-wrap>
+                        <md-button ta-back class="md-raised">Voltar</md-button> 
+                        <md-button ng-disabled="tipoImovelForm.$invalid" class="md-raised md-primary" href="#/imovel/bairros/logradouros/imoveis/{{SqBairro}}/{{SqLogradouro}}/{{imovel.SqTipoimovel}}/{{imovel.SqImovelrecadastramento}}">Próximo</md-button>  
+                    </section>
+                </form>
+            </div>
+        </div>
+    </md-content>
+</div>
+

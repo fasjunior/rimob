@@ -1,0 +1,24 @@
+﻿<md-dialog aria-label="Atualização de Dados">
+    <form ng-cloak>
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                <h2>Atualização</h2>
+                <span flex></span>
+            </div>
+        </md-toolbar>
+
+        <md-dialog-content>
+            <div class="md-dialog-content">
+                <p>
+                   {{status}}
+                </p>
+                <md-progress-linear md-mode="indeterminate" ng-disabled="completed"></md-progress-linear>
+            </div>
+            <md-dialog-actions>
+                <md-button class="md-primary" ng-show="completed" ng-click="cancel()">
+                    fechar
+                </md-button>
+            </md-dialog-actions>
+        </md-dialog-content>
+    </form>
+</md-dialog>

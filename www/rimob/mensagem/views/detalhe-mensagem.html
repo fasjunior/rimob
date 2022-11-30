@@ -1,0 +1,46 @@
+﻿<section class="content" ng-init="obterMensagem()">
+    <div class="row">
+        <div class="col-md-9">
+            <div class="box box-primary">
+                <div class="box-header with-border">
+                    <h3 class="box-title">Mensagem</h3>
+                </div>
+                <!-- /.box-header -->
+                <div class="box-body no-padding">
+                    <div class="mailbox-read-info">
+                        <h3>{{mensagem.DsTitulo}}</h3>
+                        <h5>
+                            
+                            <span class="mailbox-read-time">{{mensagem.DtNotificacao}}</span>
+                        </h5>
+                    </div>
+                    <!-- /.mailbox-read-info -->
+                    <div class="mailbox-controls with-border text-center">
+                        <div class="btn-group">
+                            <button ng-click="apagarMensagem(mensagem.SqNotificacao)" type="button" class="btn btn-default btn-sm" data-toggle="tooltip" data-container="body">
+                                <i class="fa fa-trash-o"></i>
+                            </button>
+                            <button ta-back type="button" class="btn btn-default btn-sm" data-toggle="tooltip" data-container="body">
+                                <i class="fa fa-reply"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <!-- /.mailbox-controls -->
+                    <div class="mailbox-read-message">
+                       {{mensagem.DsConteudo}}
+                    </div>
+                    <!-- /.mailbox-read-message -->
+                </div>
+                <!-- /.box-footer -->
+                <div class="box-footer">
+                    <div class="pull-right">
+                        <button ta-back type="button" class="btn btn-default"><i class="fa fa-reply"></i> Voltar</button>
+                    </div>
+                    <button ng-click="apagarMensagem(mensagem.SqNotificacao)" type="button" class="btn btn-default"><i class="fa fa-trash-o"></i> Apagar</button>
+                </div>
+                <!-- /.box-footer -->
+            </div>
+            <!-- /. box -->
+        </div>
+    </div>
+</section>
