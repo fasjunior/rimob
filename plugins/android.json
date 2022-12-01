@@ -1,0 +1,33 @@
+{
+  "prepare_queue": {
+    "installed": [],
+    "uninstalled": []
+  },
+  "config_munge": {
+    "files": {}
+  },
+  "installed_plugins": {
+    "cordova-build-architecture": {
+      "PACKAGE_NAME": "com.br.rimob"
+    },
+    "cordova-plugin-camera": {
+      "ANDROIDX_CORE_VERSION": "1.6.+",
+      "PACKAGE_NAME": "com.br.rimob"
+    },
+    "cordova-plugin-file-transfer": {
+      "PACKAGE_NAME": "com.br.rimob"
+    },
+    "cordova-plugin-geolocation": {
+      "PACKAGE_NAME": "com.br.rimob"
+    },
+    "cordova-plugin-splashscreen": {
+      "PACKAGE_NAME": "com.br.rimob"
+    }
+  },
+  "dependent_plugins": {
+    "cordova-plugin-file": {
+      "ANDROIDX_WEBKIT_VERSION": "1.4.0",
+      "PACKAGE_NAME": "com.br.rimob"
+    }
+  }
+}

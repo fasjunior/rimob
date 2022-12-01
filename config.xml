@@ -12,21 +12,27 @@
     <platform name="ios">
         <access origin="*" />
     </platform>
+    <preference name="usesCleartextTraffic" value="true" />
     <preference name="phonegap-version" value="cli-6.5.0" />
     <preference name="xwalkMultipleApk" value="false" />
-    <plugin name="cordova-plugin-compat" spec="1.1.0" />
-    <plugin name="cordova-plugin-geolocation" spec="2.4.3">
-        <preference name="webviewbounce" value="false" />
-        <preference name="DisallowOverscroll" value="true" />
-        <preference name="SplashScreenDelay" value="4000" />
-        <variable name="GEOLOCATION_USAGE_DESCRIPTION" value=" " />
-    </plugin>
-    <plugin name="cordova-plugin-camera" spec="2.4.1">
+    <preference name="xwalk64bit" value="true" />
+    <preference name="buildArchitecture" value="x86_64" /> 
+    <plugin name="cordova-build-architecture" spec="https://github.com/MBuchalik/cordova-build-architecture.git#v1.0.4" source="git" />
+    <plugin name="cordova-plugin-geolocation" spec="2.4.3" />
+    <preference name="webviewbounce" value="false" />
+    <preference name="DisallowOverscroll" value="true" />
+    <preference name="SplashScreenDelay" value="4000" />
+    <variable name="GEOLOCATION_USAGE_DESCRIPTION" value=" " />
+    <plugin name="cordova-plugin-compat" spec="https://github.com/apache/cordova-plugin-compat" source="git" />
+    <plugin name="cordova-plugin-camera" spec="https://github.com/apache/cordova-plugin-camera" source="git">
         <variable name="CAMERA_USAGE_DESCRIPTION" value=" " />
         <variable name="PHOTOLIBRARY_USAGE_DESCRIPTION" value=" " />
-    </plugin>
+    </plugin> 
     <plugin name="cordova-plugin-splashscreen" spec="4.0.3" />
     <platform name="android">
+        <hook type="after_platform_add" src="hooks/android/modify-android-gradle-plugin-version.js" />
+        <preference name="AndroidInsecureFileModeEnabled" value="true" />
+        <preference name="AndroidPersistentFileLocation" value="Compatibility" />
         <preference name="android-minSdkVersion" value="20" />
         <preference name="android-targetSdkVersion" value="30" />
         <preference name="android-installLocation" value="auto" />
@@ -34,6 +40,9 @@
         <preference name="AndroidLaunchMode" value="singleTop" />
         <preference name="loadUrlTimeoutValue" value="700000" />
         <preference name="SplashMaintainAspectRatio" value="true" />
+        <edit-config file="app/src/main/AndroidManifest.xml" mode="merge" target="/manifest/application">
+            <application android:usesCleartextTraffic="true" />
+        </edit-config>
     </platform>
     <platform name="ios">
         <preference name="deployment-target" value="12" />
