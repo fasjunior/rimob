@@ -1,18 +1,17 @@
 ﻿<link href="rimob/login/template/css/material-kit.css" rel="stylesheet" />
 <div class="wrapper margin-left-login" ng-cloak>
-    <div class="header header-filter background-login">
-         <div class="container">
-                <div class="row margin-top-login">
-                    <div class="col-md-4 col-md-offset-4 col-sm-6 col-sm-offset-3">
-                        <div class="card card-signup">
-                            <form class="form" name="loginForm">
-                                <div class="header header-primary text-center">
-                                    <h3><b>R</b>imob</h3>
-                                   
-                                </div>
-                                <p class="text-divider">Informe os dados abaixo</p>
-                                <div class="content content-login" style="margin-top: 10px;">
-                                    <!--<div class="input-group">
+  <div class="header header-filter background-login">
+    <div class="container">
+      <div class="row margin-top-login">
+        <div class="col-md-4 col-md-offset-4 col-sm-6 col-sm-offset-3">
+          <div class="card card-signup">
+            <form class="form" name="loginForm">
+              <div class="header header-primary text-center">
+                <h3><b>R</b>imob</h3>
+              </div>
+              <p class="text-divider">Informe os dados abaixo</p>
+              <div class="content content-login" style="margin-top: 10px">
+                <!--<div class="input-group">
                                         <span class="input-group-addon">
                                             <i class="material-icons">business</i>
                                         </span>
@@ -21,60 +20,79 @@
                                             <div ng-message="cnpjInvalid" class="colorRed">CNPJ inválido!</div>
                                         </div>
                                     </div>-->
-                                    <div class="input-group">
-                                        <span class="input-group-addon">
-                                            <i class="material-icons">location_city</i>
-                                        </span>
-                                        <md-input-container style="width:100%;">
-                                            <label>Estado</label>
-                                            <md-select name="SgUf" ng-model="agente.SgUf" required>
-                                                <md-option><em>- Selecione -</em></md-option>
-                                                <md-option value="AC">Acre</md-option>
-                                                <md-option value="AL">Alagoas</md-option>
-                                                <md-option value="AP">Amapá</md-option>
-                                                <md-option value="AM">Amazonas</md-option>
-                                                <md-option value="BA">Bahia</md-option>
-                                                <md-option value="CE">Ceará</md-option>
-                                                <md-option value="DF">Distrito Federal</md-option>
-                                                <md-option value="ES">Espirito Santo</md-option>
-                                                <md-option value="GO">Goiás</md-option>
-                                                <md-option value="MA">Maranhão</md-option>
-                                                <md-option value="MT">Mato Grosso</md-option>
-                                                <md-option value="MS">Mato Grosso do Sul</md-option>
-                                                <md-option value="MG">Minas Gerais</md-option>
-                                                <md-option value="PA">Pará</md-option>
-                                                <md-option value="PB">Paraíba</md-option>
-                                                <md-option value="PR">Paraná</md-option>
-                                                <md-option value="PE">Pernambuco</md-option>
-                                                <md-option value="PI">Piauí</md-option>
-                                                <md-option value="RJ">Rio de Janeiro</md-option>
-                                                <md-option value="RN">Rio Grande do Norte</md-option>
-                                                <md-option value="RS">Rio Grande do Sul</md-option>
-                                                <md-option value="RO">Rondônia</md-option>
-                                                <md-option value="RR">Roraima</md-option>
-                                                <md-option value="SC">Santa Catarina</md-option>
-                                                <md-option value="SP">São Paulo</md-option>
-                                                <md-option value="SE">Sergipe</md-option>
-                                                <md-option value="TO">Tocantins</md-option>
-                                            </md-select>
-                                        </md-input-container>                
-                                    </div>
-                                    <div class="input-group">
-                                        <span class="input-group-addon">
-                                            <i class="material-icons">face</i>
-                                        </span>
-                                        <input type="tel" name="NuCpf" ng-model="agente.NuCpf" class="form-control" placeholder="CPF" maxlength="14" ta-cpf-cnpj option="cpf" required>
-                                        <div ng-messages="loginForm.NuCpf.$error">
-                                            <div ng-message="cpfInvalid" class="colorRed">CPF inválido!</div>
-                                        </div>
-                                    </div>
-                                    <div class="input-group">
-                                        <span class="input-group-addon">
-                                            <i class="material-icons">lock_outline</i>
-                                        </span>
-                                        <input type="password" name="DsSenha" ng-model="agente.DsSenha" class="form-control" placeholder="Senha" required>
-                                    </div>
-                                    <!-- If you want to add a checkbox to this form, uncomment this code
+                <div class="input-group">
+                  <span class="input-group-addon">
+                    <i class="material-icons">location_city</i>
+                  </span>
+                  <md-input-container style="width: 100%">
+                    <label>Estado</label>
+                    <md-select name="SgUf" ng-model="agente.SgUf" required>
+                      <md-option><em>- Selecione -</em></md-option>
+                      <md-option value="AC">Acre</md-option>
+                      <md-option value="AL">Alagoas</md-option>
+                      <md-option value="AP">Amapá</md-option>
+                      <md-option value="AM">Amazonas</md-option>
+                      <md-option value="BA">Bahia</md-option>
+                      <md-option value="CE">Ceará</md-option>
+                      <md-option value="DF">Distrito Federal</md-option>
+                      <md-option value="ES">Espirito Santo</md-option>
+                      <md-option value="GO">Goiás</md-option>
+                      <md-option value="MA">Maranhão</md-option>
+                      <md-option value="MT">Mato Grosso</md-option>
+                      <md-option value="MS">Mato Grosso do Sul</md-option>
+                      <md-option value="MG">Minas Gerais</md-option>
+                      <md-option value="PA">Pará</md-option>
+                      <md-option value="PB">Paraíba</md-option>
+                      <md-option value="PR">Paraná</md-option>
+                      <md-option value="PE">Pernambuco</md-option>
+                      <md-option value="PI">Piauí</md-option>
+                      <md-option value="RJ">Rio de Janeiro</md-option>
+                      <md-option value="RN">Rio Grande do Norte</md-option>
+                      <md-option value="RS">Rio Grande do Sul</md-option>
+                      <md-option value="RO">Rondônia</md-option>
+                      <md-option value="RR">Roraima</md-option>
+                      <md-option value="SC">Santa Catarina</md-option>
+                      <md-option value="SP">São Paulo</md-option>
+                      <md-option value="SE">Sergipe</md-option>
+                      <md-option value="TO">Tocantins</md-option>
+                    </md-select>
+                  </md-input-container>
+                </div>
+                <div class="input-group">
+                  <span class="input-group-addon">
+                    <i class="material-icons">face</i>
+                  </span>
+                  <input
+                    type="tel"
+                    name="NuCpf"
+                    ng-model="agente.NuCpf"
+                    class="form-control"
+                    placeholder="CPF"
+                    maxlength="14"
+                    ta-cpf-cnpj
+                    option="cpf"
+                    required
+                  />
+                  <div ng-messages="loginForm.NuCpf.$error">
+                    <div ng-message="cpfInvalid" class="colorRed">
+                      CPF inválido!
+                    </div>
+                  </div>
+                </div>
+                <div class="input-group">
+                  <span class="input-group-addon">
+                    <i class="material-icons">lock_outline</i>
+                  </span>
+                  <input
+                    type="password"
+                    name="DsSenha"
+                    ng-model="agente.DsSenha"
+                    class="form-control"
+                    placeholder="Senha"
+                    required
+                  />
+                </div>
+                <!-- If you want to add a checkbox to this form, uncomment this code
 
                                     <div class="checkbox">
                                         <label>
@@ -82,29 +100,38 @@
                                             Subscribe to newsletter
                                         </label>
                                     </div> -->
-                                </div>
-                                <div class="footer text-center">
-                                    <!--<a href="#pablo" class="btn btn-simple btn-primary btn-lg">Entrar</a>-->
-                                    <md-button ng-disabled="loginForm.$invalid" ng-click="obterAgenteImobiliario(agente)" class="md-primary md-flat md-block">Entrar</md-button>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-         <footer class="footer">
-                <div class="container">
-                    <div class="copyright footer-login">
-                        &copy; Desenvolvido <i class="fa fa-heart heart"></i> por <a href="#" onclick="window.open('http://www.3tecnos.com.br', '_system');">3Tecnos Tecnologia</a>
-                    </div>
-                    <div class="copyright footer-login" style="text-align: center">
-                        <span>Versão</span> <span ng-bind="$root.version"></span>
-                    </div>
-                </div>
-            </footer>
-        <!--<div style="height:360px;"></div>-->
+              </div>
+              <div class="footer text-center">
+                <!--<a href="#pablo" class="btn btn-simple btn-primary btn-lg">Entrar</a>-->
+                <md-button
+                  ng-disabled="loginForm.$invalid"
+                  ng-click="obterAgenteImobiliario(agente)"
+                  class="md-primary md-flat md-block"
+                  >Entrar</md-button
+                >
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
     </div>
+    <footer class="footer">
+      <div class="container">
+        <div class="copyright footer-login">
+          &copy; Desenvolvido <i class="fa fa-heart heart"></i> por
+          <a
+            href="#"
+            onclick="window.open('http://www.3tecnos.com.br', '_blank');"
+            >3Tecnos Tecnologia</a
+          >
+        </div>
+        <div class="copyright footer-login" style="text-align: center">
+          <span>Versão</span> <span ng-bind="$root.version"></span>
+        </div>
+      </div>
+    </footer>
+    <!--<div style="height:360px;"></div>-->
+  </div>
 </div>
 <script src="rimob/login/template/js/material.min.js"></script>
 <script src="rimob/login/template/js/material-kit.js"></script>
-

@@ -15,13 +15,10 @@
   "devDependencies": {
     "async": "^3.2.4",
     "cordova-android": "^10.1.2",
-    "cordova-build-architecture": "https://github.com/MBuchalik/cordova-build-architecture.git#v1.0.4",
-    "cordova-plugin-camera": "github:apache/cordova-plugin-camera",
-    "cordova-plugin-compat": "github:apache/cordova-plugin-compat",
-    "cordova-plugin-file": "^7.0.0",
-    "cordova-plugin-file-transfer": "github:apache/cordova-plugin-file-transfer",
-    "cordova-plugin-geolocation": "2.4.3",
-    "cordova-plugin-splashscreen": "4.0.3"
+    "cordova-build-architecture": "github:MBuchalik/cordova-build-architecture#v1.0.4",
+    "cordova-plugin-camera": "github:alemit/cordova-plugin-camera",
+    "cordova-plugin-geolocation": "github:apache/cordova-plugin-geolocation",
+    "cordova-plugin-splashscreen": "6.0.2"
   },
   "cordova": {
     "platforms": [
@@ -29,15 +26,15 @@
     ],
     "plugins": {
       "cordova-plugin-splashscreen": {},
-      "cordova-plugin-file-transfer": {},
+      "cordova-build-architecture": {},
       "cordova-plugin-geolocation": {
-        "GEOLOCATION_USAGE_DESCRIPTION": " "
+        "GPS_REQUIRED": "true"
       },
       "cordova-plugin-camera": {
+        "CAMERA_USAGE_DESCRIPTION": " ",
+        "PHOTOLIBRARY_USAGE_DESCRIPTION": " ",
         "ANDROIDX_CORE_VERSION": "1.6.+"
-      },
-      "cordova-plugin-compat": {},
-      "cordova-build-architecture": {}
+      }
     }
   }
 }

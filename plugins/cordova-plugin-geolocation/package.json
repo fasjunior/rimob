@@ -1,55 +1,42 @@
 {
   "name": "cordova-plugin-geolocation",
-  "version": "2.4.3",
+  "version": "4.1.1-dev",
   "description": "Cordova Geolocation Plugin",
   "cordova": {
     "id": "cordova-plugin-geolocation",
     "platforms": [
       "android",
-      "amazon-fireos",
       "ios",
-      "blackberry10",
-      "ubuntu",
-      "wp7",
-      "wp8",
-      "windows8",
-      "windows",
-      "firefoxos"
+      "windows"
     ]
   },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/apache/cordova-plugin-geolocation"
-  },
+  "repository": "github:apache/cordova-plugin-geolocation",
+  "bugs": "https://github.com/apache/cordova-plugin-geolocation/issues",
   "keywords": [
     "cordova",
     "geolocation",
     "ecosystem:cordova",
     "cordova-android",
-    "cordova-amazon-fireos",
     "cordova-ios",
-    "cordova-blackberry10",
-    "cordova-ubuntu",
-    "cordova-wp7",
-    "cordova-wp8",
-    "cordova-windows8",
-    "cordova-windows",
-    "cordova-firefoxos"
+    "cordova-windows"
   ],
   "scripts": {
-    "test": "npm run jshint",
-    "jshint": "node node_modules/jshint/bin/jshint www && node node_modules/jshint/bin/jshint src && node node_modules/jshint/bin/jshint tests"
+    "test": "npm run lint",
+    "lint": "eslint ."
   },
   "author": "Apache Software Foundation",
   "license": "Apache-2.0",
   "engines": {
     "cordovaDependencies": {
       "3.0.0": {
+        "cordova-android": ">=6.3.0"
+      },
+      "5.0.0": {
         "cordova": ">100"
       }
     }
   },
   "devDependencies": {
-    "jshint": "^2.6.0"
+    "@cordova/eslint-config": "^3.0.0"
   }
 }

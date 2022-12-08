@@ -17,25 +17,19 @@
  * specific language governing permissions and limitations
  * under the License.
  *
- */
+*/
 
-var Coordinates = require('./Coordinates');
+var splash = require('cordova/splashscreen');
 
-var Position = function (coords, timestamp) {
-    if (coords) {
-        this.coords = new Coordinates(
-            coords.latitude,
-            coords.longitude,
-            coords.altitude,
-            coords.accuracy,
-            coords.heading,
-            coords.velocity,
-            coords.altitudeAccuracy
-        );
-    } else {
-        this.coords = new Coordinates();
+var SplashScreen = {
+    show: function () {
+        splash.show();
+    },
+    hide: function () {
+        splash.hide();
     }
-    this.timestamp = timestamp !== undefined ? timestamp : new Date().getTime();
 };
 
-module.exports = Position;
+module.exports = SplashScreen;
+
+require('cordova/exec/proxy').add('SplashScreen', SplashScreen);

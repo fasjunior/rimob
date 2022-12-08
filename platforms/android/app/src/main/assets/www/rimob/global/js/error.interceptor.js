@@ -25,11 +25,11 @@
             exceptionMessage: error.data.error_description,
           });
         } else {
-          //   let errorMsg =
-          //     "Não foi possível conectar-se ao servidor. Verifique se está conectado à internet e tente novamente.";
-          //   $rootScope.$broadcast("responseErrorInterceptor", {
-          //     exceptionMessage: error,
-          //   });
+          let errorMsg =
+            "Não foi possível conectar-se ao servidor. Verifique se está conectado à internet e tente novamente.";
+          $rootScope.$broadcast("responseErrorInterceptor", {
+            exceptionMessage: error,
+          });
         }
 
         return $q.reject(error);

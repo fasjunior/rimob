@@ -1,54 +1,30 @@
 <?xml version='1.0' encoding='utf-8'?>
 <widget android-versionCode="20" defaultlocale="pt-BR" id="com.br.rimob" ios-CFBundleVersion="1.3.1" version="1.3.1" xmlns="http://www.w3.org/ns/widgets" xmlns:android="http://schemas.android.com/apk/res/android" xmlns:cdv="http://cordova.apache.org/ns/1.0" xmlns:gap="http://phonegap.com/ns/1.0">
-    <preference default="arm" name="buildArchitecture" />
-    <feature name="Camera">
-        <param name="android-package" value="org.apache.cordova.camera.CameraLauncher" />
-    </feature>
-    <feature name="File">
-        <param name="android-package" value="org.apache.cordova.file.FileUtils" />
-        <param name="onload" value="true" />
-    </feature>
-    <allow-navigation href="cdvfile:*" />
-    <feature name="FileTransfer">
-        <param name="android-package" value="org.apache.cordova.filetransfer.FileTransfer" />
-    </feature>
-    <feature name="Geolocation">
-        <param name="android-package" value="org.apache.cordova.geolocation.Geolocation" />
-    </feature>
     <feature name="SplashScreen">
         <param name="android-package" value="org.apache.cordova.splashscreen.SplashScreen" />
         <param name="onload" value="true" />
+    </feature>
+    <preference default="arm" name="buildArchitecture" />
+    <feature name="Geolocation">
+        <param name="android-package" value="org.apache.cordova.geolocation.Geolocation" />
+    </feature>
+    <feature name="Camera">
+        <param name="android-package" value="org.apache.cordova.camera.CameraLauncher" />
     </feature>
     <name>Rimob</name>
     <description>Rimob - Recadastramento Imobiliário</description>
     <author>3Tecnos Tecnologia</author>
     <content src="index.html" />
-    <access launch-external="yes" origin="*" />
     <allow-intent href="http://*/*" />
     <allow-intent href="https://*/*" />
+    <allow-navigation href="http://app/*" />
+    <allow-navigation href="https://app/*" />
+    <allow-intent href="file:///*/*" />
+    <access origin="app://*" />
+    <access launch-external="yes" origin="*" />
+    <allow-intent href="*" />
     <allow-navigation href="*" />
     <variable name="GEOLOCATION_USAGE_DESCRIPTION" value=" " />
-    <splash density="ldpi" height="426" orientation="portrait" platform="android" src="package-assets/splash-320X426.png" width="320" />
-    <splash density="mdpi" height="470" orientation="portrait" platform="android" src="package-assets/splash-320X470.png" width="320" />
-    <splash density="hdpi" height="640" orientation="portrait" platform="android" src="package-assets/splash-480X640.png" width="480" />
-    <splash density="xhdpi" height="960" orientation="portrait" platform="android" src="package-assets/splash-720X960.png" width="720" />
-    <splash density="ldpi" height="320" orientation="landscape" platform="android" src="package-assets/splash-426X320.png" width="426" />
-    <splash density="mdpi" height="320" orientation="landscape" platform="android" src="package-assets/splash-470X320.png" width="470" />
-    <splash density="hdpi" height="480" orientation="landscape" platform="android" src="package-assets/splash-640X480.png" width="640" />
-    <splash density="xhdpi" height="720" orientation="landscape" platform="android" src="package-assets/splash-960X720.png" width="960" />
-    <splash height="480" orientation="portrait" platform="ios" src="package-assets/splash-320X480.png" width="320" />
-    <splash height="960" orientation="portrait" platform="ios" src="package-assets/splash-640X960.png" width="640" />
-    <splash height="1136" orientation="portrait" platform="ios" src="package-assets/splash-640X1136.png" width="640" />
-    <splash height="1334" orientation="portrait" platform="ios" src="package-assets/splash-750X1334.png" width="750" />
-    <splash height="1024" orientation="portrait" platform="ios" src="package-assets/splash-768X1024.png" width="768" />
-    <splash height="2208" orientation="portrait" platform="ios" src="package-assets/splash-1242X2208.png" width="1242" />
-    <splash height="2048" orientation="portrait" platform="ios" src="package-assets/splash-1536X2048.png" width="1536" />
-    <splash height="2732" orientation="portrait" platform="ios" src="package-assets/splash-2048X2732.png" width="2048" />
-    <splash height="768" orientation="landscape" platform="ios" src="package-assets/splash-1024X768.png" width="1024" />
-    <splash height="750" orientation="landscape" platform="ios" src="package-assets/splash-1334X750.png" width="1334" />
-    <splash height="1536" orientation="landscape" platform="ios" src="package-assets/splash-2048X1536.png" width="2048" />
-    <splash height="1242" orientation="landscape" platform="ios" src="package-assets/splash-2208X1242.png" width="2208" />
-    <splash height="2048" orientation="landscape" platform="ios" src="package-assets/splash-2732X2048.png" width="2732" />
     <icon density="ldpi" height="36" platform="android" src="package-assets/icon_36x36.png" width="36" />
     <icon density="mdpi" height="48" platform="android" src="package-assets/icon_48x48.png" width="48" />
     <icon density="hdpi" height="72" platform="android" src="package-assets/icon_72x72.png" width="72" />
@@ -83,13 +59,19 @@
     <edit-config file="app/src/main/AndroidManifest.xml" mode="merge" target="/manifest/application">
         <application android:usesCleartextTraffic="true" />
     </edit-config>
+    <splash density="ldpi" height="426" orientation="portrait" src="package-assets/splash-320X426.png" width="320" />
+    <splash density="mdpi" height="470" orientation="portrait" src="package-assets/splash-320X470.png" width="320" />
+    <splash density="hdpi" height="640" orientation="portrait" src="package-assets/splash-480X640.png" width="480" />
+    <splash density="xhdpi" height="960" orientation="portrait" src="package-assets/splash-720X960.png" width="720" />
+    <splash density="ldpi" height="320" orientation="landscape" src="package-assets/splash-426X320.png" width="426" />
+    <splash density="mdpi" height="320" orientation="landscape" src="package-assets/splash-470X320.png" width="470" />
+    <splash density="hdpi" height="480" orientation="landscape" src="package-assets/splash-640X480.png" width="640" />
+    <splash density="xhdpi" height="720" orientation="landscape" src="package-assets/splash-960X720.png" width="960" />
     <preference name="loglevel" value="DEBUG" />
     <preference name="android-build-tool" value="gradle" />
-    <preference name="usesCleartextTraffic" value="true" />
-    <preference name="phonegap-version" value="cli-6.5.0" />
-    <preference name="xwalkMultipleApk" value="false" />
+    <preference name="xwalkMultipleApk" value="true" />
     <preference name="xwalk64bit" value="true" />
-    <preference name="buildArchitecture" value="x86_64" />
+    <preference name="buildArchitecture" value="X86_64" />
     <preference name="webviewbounce" value="false" />
     <preference name="DisallowOverscroll" value="true" />
     <preference name="SplashScreenDelay" value="4000" />
