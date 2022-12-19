@@ -28,20 +28,6 @@
     $scope.mensagem = "";
     let o = this;
     $scope.obterAgenteImobiliario = function (agente) {
-      //   loginService
-      //     .teste()
-      //     .then(function (response) {
-      //       $rootScope.$broadcast("responseErrorInterceptor", {
-      //         exceptionMessage: response,
-      //       });
-      //     })
-      //     .catch(function (error) {
-      //       let msg = "catch: " + error;
-      //       $rootScope.$broadcast("responseErrorInterceptor", {
-      //         exceptionMessage: error,
-      //       });
-      //     });
-
       $rootScope.loading = true;
       $rootScope.SgUf = agente.SgUf;
       authService
@@ -54,12 +40,6 @@
             agente.NuCpf,
             agente.DsSenha
           );
-        })
-        .catch(function (error) {
-          let msg = "catch: " + error;
-          $rootScope.$broadcast("responseErrorInterceptor", {
-            exceptionMessage: error,
-          });
         })
         .then(function (result) {
           let agentesImob = angular.fromJson(result.data);

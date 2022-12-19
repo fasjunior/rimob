@@ -1,0 +1,52 @@
+﻿<div ng-if="exibePanel">
+    <div class="pane-head">
+        <button type="button" class="close" data-ng-click="panels.close();">×</button>
+    </div>
+
+    <div class="pane-body">
+        <md-card class="titleCard">
+            <md-card-title>
+                <md-card-title-media>
+                    <div class="md-media-sm card-media" layout>
+                        <ng-md-icon class="iconWhite" icon="home" size="50"></ng-md-icon>
+                    </div>
+                </md-card-title-media>
+                <md-card-title-text>
+                    <span class="md-headline">Pesquisa Contribuinte</span>
+                </md-card-title-text>
+            </md-card-title>
+        </md-card>
+            <div class="box-body">
+                <ta-findbox ng-keyup="pesquisa=$event.target.value" promisefunction="obterContribuintes(dsBusca)" targetobject="contribuintes"></ta-findbox>
+                <md-content layout-padding>
+                    <form id="frmContrib" role="form" name="pesquisaForm" ng-cloak>
+                        <md-list class="md-dense" flex>
+                            <md-list-item class="md-3-line" ng-repeat="contribuinte in contribuintes | limitTo: 10">
+                                <ng-md-icon class="md-avatar iconBlue" icon="account_circle" size="40"></ng-md-icon>
+                                <div ng-click="selecionarContribuinte(contribuinte)" class="md-list-item-text" layout="column">
+                                    <h3>{{ contribuinte.NmContribuinte | uppercase }}</h3>
+                                    <h4>{{ contribuinte.NuCpfcnpjcontribuinte | cpf_cnpj}}</h4>
+                                    <p>{{ contribuinte.NuTelefone | tel }}</p>
+                                </div>
+                                
+                            </md-list-item>
+                            <p id="btnPanel" ng-if="contribuintes.length == 0 && pesquisa.length > 0">Nenhum resultado encontrado para "{{pesquisa}}".</p>
+                        </md-list>
+                    </form>
+                    
+                </md-content>
+                
+                <div id="btnPanel">
+                    <md-button md-autofocus flex class="md-primary" data-ng-click="close()">
+                        Cancelar
+                    </md-button>
+                </div>
+
+            </div>
+
+
+    </div>
+
+
+</div>
+

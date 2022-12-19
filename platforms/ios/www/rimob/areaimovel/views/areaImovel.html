@@ -1,0 +1,145 @@
+﻿<div ng-if="exibePanel">
+    <div class="pane-head">
+        <button type="button" class="close" data-ng-click="panels.close();">×</button>
+    </div>
+
+    <div class="pane-body">
+        <md-card class="titleCard">
+            <md-card-title>
+                <md-card-title-media>
+                    <div class="md-media-sm card-media" layout>
+                        <ng-md-icon class="iconWhite" icon="home" size="50"></ng-md-icon>
+                    </div>
+                </md-card-title-media>
+                <md-card-title-text>
+                    <span class="md-headline">Área do Imóvel</span>
+                </md-card-title-text>
+            </md-card-title>
+        </md-card>
+
+
+        <div class="box-body">
+            <md-content layout-padding>
+                <form role="form" name="forms.descAreaForm" style="margin-bottom: -50px;" ng-cloak>
+                    <div layout="row">
+                        <md-input-container flex="50" style="display:flex; align-items:center;">
+                            <label> Descrição</label>
+                            <input type="text" name="NmAreaimovel" ng-model="novaAreaImovel.NmAreaimovel" required>
+                            <div ng-messages="descAreaForm.NmAreaimovel.$error">
+                                <div ng-message="required">Campo Obrigatório.</div>
+                            </div>
+                        </md-input-container>
+                        <md-input-container flex="50" style="margin-top: -5px; margin-left: 5px;">
+                            <md-switch name="FlIrregular" ng-model="novaAreaImovel.FlIrregular" ng-true-value="'1'" ng-false-value="'0'" aria-label="Área Irregular">
+                                Irregular
+                            </md-switch>
+                        </md-input-container>
+                    </div>
+                    <div layout="row">
+                        <md-input-container flex="50">
+                            <label>Área Terreno (m²)</label>
+                            <input type="number" ng-disabled="novaAreaImovel.FlIrregular == '0'" name="VlTotalterreno" ng-model="novaAreaImovel.VlTotalterreno" required />
+                        </md-input-container>
+
+                        <md-input-container flex="50">
+                            <label>Área Construída (m²)</label>
+                            <input type="number" ng-disabled="novaAreaImovel.FlIrregular == '0'" name="VlTotalconstruido" ng-model="novaAreaImovel.VlTotalconstruido" required />
+                        </md-input-container>
+                    </div>
+                </form>
+
+                <md-nav-bar md-selected-nav-item="currentNavItem"
+                            nav-bar-aria-label="navigation links">
+                    <md-nav-item md-nav-sref="pgTerreno" name="pgTerreno" sref-opts="{reload:true, notify:true}">
+                        Terreno
+                    </md-nav-item>
+                    <md-nav-item md-nav-sref="pgConstruida" name="pgConstruida" sref-opts="{reload:true, notify:true}">
+                        Construída
+                    </md-nav-item>
+
+                </md-nav-bar>
+                <form role="form" name="forms.terrenoForm" ng-show="currentNavItem=='pgTerreno'" ng-cloak>
+                    <div layout="row">
+                        <md-input-container flex="50">
+                            <label>Frente (m)</label>
+                            <input type="number" name="frente" ng-model="novaAreaImovel.VlFrenteterreno" ng-change="calcularAreasImovel()" required />
+                            <div ng-messages="terrenoForm.frente.$error">
+                                <div ng-message="required">Campo Obrigatório.</div>
+                            </div>
+                        </md-input-container>
+
+                        <md-input-container flex="50">
+                            <label>Fundo (m)</label>
+                            <input type="number" name="fundo" ng-model="novaAreaImovel.VlFundoterreno" ng-change="calcularAreasImovel()" required />
+                            <div ng-messages="terrenoForm.fundo.$error">
+                                <div ng-message="required">Campo Obrigatório.</div>
+                            </div>
+                        </md-input-container>
+                    </div>
+                    <div layout="row">
+                        <md-input-container flex="50">
+                            <label>Lado Esquerdo (m)</label>
+                            <input type="number" name="ladoE" ng-model="novaAreaImovel.VlLadoesquerdoterreno" ng-change="calcularAreasImovel()" required />
+                            <div ng-messages="terrenoForm.ladoE.$error">
+                                <div ng-message="required">Campo Obrigatório.</div>
+                            </div>
+                        </md-input-container>
+                        <md-input-container flex="50">
+                            <label>Lado Direito (m)</label>
+                            <input type="number" name="ladoD" ng-model="novaAreaImovel.VlLadodireitoterreno" ng-change="calcularAreasImovel()" required />
+                            <div ng-messages="terrenoForm.ladoD.$error">
+                                <div ng-message="required">Campo Obrigatório.</div>
+                            </div>
+                        </md-input-container>
+                    </div>
+                </form>
+                <form role="form" name="forms.construidaForm" ng-show="currentNavItem=='pgConstruida'" ng-cloak>
+                    <div layout="row">
+                        <md-input-container flex="50">
+                            <label>Frente (m)</label>
+                            <input type="number" name="frente" ng-model="novaAreaImovel.VlFrenteconstrucao" ng-change="calcularAreasImovel()" required />
+                            <div ng-messages="construidaForm.frente.$error">
+                                <div ng-message="required">Campo Obrigatório.</div>
+                            </div>
+                        </md-input-container>
+
+                        <md-input-container flex="50">
+                            <label>Fundo (m)</label>
+                            <input type="number" name="fundo" ng-model="novaAreaImovel.VlFundoconstrucao" ng-change="calcularAreasImovel()" required />
+                            <div ng-messages="construidaForm.fundo.$error">
+                                <div ng-message="required">Campo Obrigatório.</div>
+                            </div>
+                        </md-input-container>
+                    </div>
+                    <div layout="row">
+                        <md-input-container flex="50">
+                            <label>Lado Esquerdo (m)</label>
+                            <input type="number" name="ladoE" ng-model="novaAreaImovel.VlLadoesquerdoconstrucao" ng-change="calcularAreasImovel()" required />
+                            <div ng-messages="construidaForm.ladoE.$error">
+                                <div ng-message="required">Campo Obrigatório.</div>
+                            </div>
+                        </md-input-container>
+                        <md-input-container flex="50">
+                            <label>Lado Direito (m)</label>
+                            <input type="number" name="ladoD" ng-model="novaAreaImovel.VlLadodireitoconstrucao" ng-change="calcularAreasImovel()" required />
+                            <div ng-messages="construidaForm.ladoD.$error">
+                                <div ng-message="required">Campo Obrigatório.</div>
+                            </div>
+                        </md-input-container>
+                    </div>
+                </form>
+                <div id="btnPanel">
+                    <md-button md-autofocus flex class="md-primary" data-ng-click="close()">
+                        Cancelar
+                    </md-button>
+                    <md-button ng-disabled="forms.terrenoForm.$invalid || forms.construidaForm.$invalid || forms.descAreaForm.$invalid" md-autofocus flex class="md-primary"
+                               data-ng-click="salvarAreaImovel(novaAreaImovel, terrenoForm, construidaForm)">
+                        Salvar
+                    </md-button>
+                </div>
+            </md-content>
+        </div>
+
+
+    </div>
+</div>

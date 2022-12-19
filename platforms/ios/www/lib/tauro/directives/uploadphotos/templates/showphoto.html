@@ -1,0 +1,16 @@
+﻿<md-dialog aria-label="Foto do imóvel">
+    <form ng-cloak>
+            <div class="md-toolbar-tools">
+                
+                <span flex></span>
+                <md-button class="md-icon-button" ng-click="cancel()">
+                    <ng-md-icon class="iconBlue" icon="close" aria-label="Fechar foto"></ng-md-icon>
+                </md-button>
+            </div>
+        <md-dialog-content>
+            <div class="md-dialog-content">
+                <img style="margin: auto; max-width: 100%;" alt="Foto Imóvel" ng-src="{{selectedImage.srcComplete}}">
+            </div>
+        </md-dialog-content>
+    </form>
+</md-dialog>

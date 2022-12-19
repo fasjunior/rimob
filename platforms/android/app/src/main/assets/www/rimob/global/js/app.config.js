@@ -1,4 +1,4 @@
-﻿angular.module("Rimob", [
+angular.module("Rimob", [
   "ngRoute",
   "ngAnimate",
   "ngMaterial",
@@ -113,7 +113,7 @@ rimobApp.constant("appConfig", {
   baseUrl: "/",
   dataBase: "Rimob.db",
   dados: "lib/ngDbOff/dboff.data.json",
-  version: "1.3.1",
+  version: "1.3.2",
   dbVersion: 3, //Controla a atualização do banco do Rimob. Se necessário a atualização,
   //incrementar essa variável e incluir os scripts no arquivo scripts.sql.json (Lembrar de incluir a query de atualizar o id na tabela Db_Version).
   credential: {
@@ -193,7 +193,7 @@ rimobApp.run([
     errorInterceptorService,
     appConfig
   ) {
-    //Deixa o conteúdo do index.html visível. A tela inicial não será exibida quando não ouver usuário logado, apenas a tela de login.
+    //Deixa o conteúdo do index.html visível. A tela inicial não será exibida quando não houver usuário logado, apenas a tela de login.
     $("#mainContainer").css("visibility", "visible");
 
     $rootScope.version = appConfig.version;
@@ -210,6 +210,7 @@ rimobApp.run([
     });
 
     $rootScope.$on("responseErrorInterceptor", function (event, args) {
+      console.log("responseErrorInterceptor", args);
       errorInterceptorService.showErrorMessage(args.exceptionMessage);
     });
 
@@ -223,7 +224,9 @@ rimobApp.run([
         $rootScope.slideRight = false;
         $("#body").removeClass();
         $("#body").addClass("skin-purple-light sidebar-collapse ng-scope");
+        o.changeStatusBarBgColor("#999999");
       } else {
+        o.changeStatusBarBgColor("#605ca8");
         $rootScope.slideRight = true;
         $dbOff
           .getDBModel()
@@ -249,11 +252,20 @@ rimobApp.run([
           })
           .then(function () {});
       }
-
       if (nextRoute == "/login/unidadegestora" && !$rootScope.unidadesGestora) {
         $location.path("/login");
       }
     });
+
+    this.changeStatusBarBgColor = function (color) {
+      document.addEventListener(
+        "deviceready",
+        function () {
+          StatusBar.backgroundColorByHexString(color);
+        },
+        false
+      );
+    };
 
     //Verifica se há notificações
     this.checkNotificacoes = function () {
@@ -373,6 +385,8 @@ rimobApp.run([
     this.checkParametro = function (nextRoute) {
       let deferred = $q.defer();
       let route = $location.path();
+
+      console.log("$rootScope.parametroAgente", $rootScope.parametroAgente);
 
       //Oculta o sidebar-menu, quando necessário
       let cssMenu = "skin-purple-light sidebar-mini ng-scope";

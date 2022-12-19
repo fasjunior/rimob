@@ -38,7 +38,7 @@ buildscript {
     repositories repos
 
     dependencies {
-        classpath "com.android.tools.build:gradle:7.3.1"
+        classpath "com.android.tools.build:gradle:${cordovaConfig.AGP_VERSION}"
 
         if (cordovaConfig.IS_GRADLE_PLUGIN_KOTLIN_ENABLED) {
             classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:${cordovaConfig.KOTLIN_VERSION}"
@@ -296,6 +296,7 @@ dependencies {
     // SUB-PROJECT DEPENDENCIES START
     implementation(project(path: ":CordovaLib"))
     implementation "androidx.core:core:1.6.+"
+    implementation "androidx.webkit:webkit:1.4.0"
     // SUB-PROJECT DEPENDENCIES END
 }
 

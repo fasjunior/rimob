@@ -1,0 +1,141 @@
+﻿<div ng-if="exibePanel">
+    <div class="pane-head">
+        <button type="button" class="close" data-ng-click="panels.close();">×</button>
+    </div>
+
+    <div class="pane-body">
+        <md-card class="titleCard">
+            <md-card-title>
+                <md-card-title-media>
+                    <div class="md-media-sm card-media" layout>
+                        <ng-md-icon class="iconWhite" icon="account_box" size="50"></ng-md-icon>
+                    </div>
+                </md-card-title-media>
+                <md-card-title-text>
+                    <span class="md-headline">Novo Contribuinte</span>
+                    <!--\<span class="md-subhead description">Cadastro de um novo contribuinte</span>-->
+                </md-card-title-text>
+            </md-card-title>
+        </md-card>
+
+        
+            <div class="box-body">
+                <md-content layout-padding>
+                    <form role="form" name="contribuinteForm" autocomplete="off" ng-cloak>
+                        <md-input-container class="md-block">
+                            <label>Nome do Contribuinte</label>
+                            <input type="text" name="NmContribuinte" ng-model="novoContribuinte.NmContribuinte" required>
+                        </md-input-container>
+
+                        <md-input-container class="md-block">
+                            <label>CPF/CNPJ</label>
+                            <input type="tel" name="NuCpfcnpjcontribuinte"  ng-model="novoContribuinte.NuCpfcnpjcontribuinte" ta-cpf-cnpj>
+                            <div ng-messages="contribuinteForm.NuCpfcnpjcontribuinte.$error">
+                                <div ng-message="cpfInvalid">CPF inválido!</div>
+                                <div ng-message="cnpjInvalid">CNPJ inválido!</div>
+                            </div>
+                        </md-input-container>
+                        <md-input-container class="md-block">
+                            <label>País</label>
+                            <md-select ng-model="novoContribuinte.CdPais" data-md-container-class="selectSelectHeader" md-on-open="obterPaises()" ng-change="verificaPaisSelecionado()">
+                                <md-option ng-repeat="pais in paises" ng-value="pais.CdPais">
+                                    {{pais.NmPais}}
+                                </md-option>
+                            </md-select>
+                        </md-input-container>
+                        <div layout="row">
+                            <md-input-container flex="30">
+                                <label>Estado</label>
+                                <md-select ng-disabled="novoContribuinte.CdPais != 76" id="selectPanel" ng-model="municipio.SgUf" ng-change="verificaEstadoSelecionado()">
+                                    <md-option><em>- Selecione -</em></md-option>
+                                    <md-option ng-repeat="estado in estados" ng-value="estado.SgUf">
+                                        {{estado.SgUf}}
+                                    </md-option>
+                                </md-select>
+                            </md-input-container>
+                            <md-input-container flex="70">
+                                <label>Município</label>
+                                <md-select ng-disabled="novoContribuinte.CdPais != 76" ng-model="novoContribuinte.CdMunicipio" md-on-open="obterMunicipios(municipio.SgUf)" data-md-container-class="selectSelectHeader">
+                                   <!--<md-select-header class="select-header">
+                                        <input class="header-searchbox md-text" ng-model="searchTerm" type="search" placeholder="Pesquisar município...">
+                                    </md-select-header>-->
+                                    <md-option ng-repeat="municipio in municipios" ng-value="municipio.CdMunicipio" data-ng-click="obterBairros(municipio.CdMunicipio)">
+                                        {{municipio.NmMunicipio}}
+                                    </md-option>
+                                </md-select>
+                            </md-input-container>
+                        </div>
+
+                        <md-input-container ng-hide="bairros != ''" class="md-block">
+                            <label>Bairro</label>
+                            <input type="text" ng-model="novoContribuinte.DsBairro">
+                        </md-input-container>
+                        <md-input-container ng-show="bairros != ''" class="md-block">
+                            <label>Bairro</label>
+                            <md-select ng-model="novoContribuinte.SqBairro" md-on-close="clearSearchTerm()" data-md-container-class="selectSelectHeader">
+                                <md-select-header class="select-header">
+                                    <input class="header-searchbox md-text" ng-model="searchTerm" type="search" placeholder="Pesquisar bairro...">
+                                </md-select-header>
+                                <md-option ng-repeat="bairro in bairros | toArray | filter:searchTerm" ng-value="bairro.SqBairro" data-ng-click="obterLogradouros(bairro.SqBairro)">
+                                    {{bairro.NmBairro}}
+                                </md-option>
+                            </md-select>
+                        </md-input-container>
+
+                        <md-input-container ng-hide="logradouros != ''" class="md-block">
+                            <label>Logradouro</label>
+                            <input type="text" ng-model="novoContribuinte.DsLogradouro">
+                        </md-input-container>
+                        <md-input-container class="md-block">
+                            <label>Logradouro</label>
+                            <md-select ng-show="logradouros != ''" ng-model="novoContribuinte.SqLogradouro" md-on-close="clearSearchTerm()" data-md-container-class="selectSelectHeader">
+                                <md-select-header class="select-header">
+                                    <input class="header-searchbox md-text" ng-model="searchTerm" type="search" placeholder="Pesquisar logradouro...">
+                                </md-select-header>
+                                <md-option ng-repeat="logradouro in logradouros | toArray | filter:searchTerm" ng-value="logradouro.SqLogradouro">
+                                    {{logradouro.NmLogradouro}}
+                                </md-option>
+                            </md-select>
+                        </md-input-container>
+
+                        <div layout="row">
+                            <md-input-container flex="50">
+                                <label>Número do Imóvel</label>
+                                <input type="text" name="NuLogradouro" ng-model="novoContribuinte.NuLogradouro" />
+                            </md-input-container>
+                            <md-input-container flex="50">
+                                <label>CEP</label>
+                                <input type="text" name="NuCep" ng-model="novoContribuinte.NuCep" ta-cep />
+                            </md-input-container>
+                        </div>
+                        <md-input-container class="md-block">
+                            <label>Complemento</label>
+                            <input type="text" name="DsComplemento" ng-model="novoContribuinte.DsComplemento">
+                        </md-input-container>
+                       
+                        <div layout="row">
+                            <md-input-container class="md-block">
+                                <label>Celular</label>
+                                <input type="text" name="NuTelefone" ng-model="novoContribuinte.NuCelular" ta-tel />
+                            </md-input-container>
+                            <md-input-container class="md-block">
+                                <label>Telefone</label>
+                                <input type="text" name="NuTelefone" ng-model="novoContribuinte.NuTelefone" ta-tel />
+                            </md-input-container>
+                        </div>
+
+                    </form>
+                    <div id="btnPanel">
+                        <md-button md-autofocus flex class="md-primary" data-ng-click="close()">
+                            Cancelar
+                        </md-button>
+                        <md-button ng-disabled="contribuinteForm.$invalid" md-autofocus flex class="md-primary" data-ng-click="salvarContribuinte()">
+                            Salvar
+                        </md-button>
+                    </div>
+                </md-content>
+            </div>
+
+
+    </div>
+</div>

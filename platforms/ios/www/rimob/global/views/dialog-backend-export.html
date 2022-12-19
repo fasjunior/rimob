@@ -1,0 +1,25 @@
+﻿<md-dialog aria-label="Exportação de Dados" ng-init="startExport()" ng-controller="backendExportCtrl">
+    <form ng-cloak>
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                <h2>Exportação de Dados</h2>
+                <span flex></span>
+            </div>
+        </md-toolbar>
+
+        <md-dialog-content>
+            <div class="md-dialog-content">
+                <p>
+                    {{status}}
+                </p>
+                <md-progress-linear class="md-warn" md-mode="buffer" value="{{value}}"
+                                    md-buffer-value="{{bufferValue}}"></md-progress-linear>
+            </div>
+            <md-dialog-actions>
+                <md-button class="md-primary" ng-show="exportCompleted" ng-click="cancel()">
+                    fechar
+                </md-button>
+            </md-dialog-actions>
+        </md-dialog-content>
+    </form>
+</md-dialog>

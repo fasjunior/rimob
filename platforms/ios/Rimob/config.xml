@@ -1,0 +1,144 @@
+<?xml version='1.0' encoding='utf-8'?>
+<widget android-versionCode="22" defaultlocale="pt-BR" id="com.br.rimob" ios-CFBundleVersion="1.3.2" version="1.3.2" xmlns="http://www.w3.org/ns/widgets" xmlns:android="http://schemas.android.com/apk/res/android" xmlns:cdv="http://cordova.apache.org/ns/1.0" xmlns:gap="http://phonegap.com/ns/1.0">
+    <feature name="CDVWebViewEngine">
+        <param name="ios-package" value="CDVWebViewEngine" />
+    </feature>
+    <feature name="LaunchScreen">
+        <param name="ios-package" value="CDVLaunchScreen" />
+    </feature>
+    <feature name="LocalStorage">
+        <param name="ios-package" value="CDVLocalStorage" />
+    </feature>
+    <feature name="Console">
+        <param name="ios-package" value="CDVLogger" />
+        <param name="onload" value="true" />
+    </feature>
+    <feature name="HandleOpenUrl">
+        <param name="ios-package" value="CDVHandleOpenURL" />
+        <param name="onload" value="true" />
+    </feature>
+    <feature name="IntentAndNavigationFilter">
+        <param name="ios-package" value="CDVIntentAndNavigationFilter" />
+        <param name="onload" value="true" />
+    </feature>
+    <feature name="GestureHandler">
+        <param name="ios-package" value="CDVGestureHandler" />
+        <param name="onload" value="true" />
+    </feature>
+    <feature name="Camera">
+        <param name="ios-package" value="CDVCamera" />
+    </feature>
+    <feature name="File">
+        <param name="ios-package" value="CDVFile" />
+        <param name="onload" value="true" />
+    </feature>
+    <feature name="FileTransfer">
+        <param name="ios-package" value="CDVFileTransfer" />
+    </feature>
+    <feature name="Geolocation">
+        <param name="ios-package" value="CDVLocation" />
+    </feature>
+    <feature name="StatusBar">
+        <param name="ios-package" value="CDVStatusBar" />
+        <param name="onload" value="true" />
+    </feature>
+    <feature name="SQLitePlugin">
+        <param name="ios-package" value="SQLitePlugin" />
+    </feature>
+    <feature name="CDVWKWebViewFileXhr">
+        <param name="ios-package" value="CDVWKWebViewFileXhr" />
+        <param name="onload" value="true" />
+    </feature>
+    <name>Rimob</name>
+    <description>Rimob - Recadastramento Imobiliário</description>
+    <author>3Tecnos Tecnologia</author>
+    <content src="index.html" />
+    <allow-intent href="http://*/*" />
+    <allow-intent href="https://*/*" />
+    <allow-navigation href="http://app/*" />
+    <allow-navigation href="https://app/*" />
+    <allow-intent href="file:///*/*" />
+    <access origin="app://*" />
+    <access launch-external="yes" origin="*" />
+    <allow-navigation href="*" />
+    <variable name="GEOLOCATION_USAGE_DESCRIPTION" value=" " />
+    <icon density="ldpi" height="36" platform="android" src="package-assets/icon_36x36.png" width="36" />
+    <icon density="mdpi" height="48" platform="android" src="package-assets/icon_48x48.png" width="48" />
+    <icon density="hdpi" height="72" platform="android" src="package-assets/icon_72x72.png" width="72" />
+    <icon density="xhdpi" height="96" platform="android" src="package-assets/icon_96x96.png" width="96" />
+    <icon height="29" platform="ios" src="package-assets/icon_29x29.png" width="29" />
+    <icon height="58" platform="ios" src="package-assets/icon_58x58.png" width="58" />
+    <icon height="87" platform="ios" src="package-assets/icon_87x87.png" width="87" />
+    <icon height="60" platform="ios" src="package-assets/icon_60x60.png" width="60" />
+    <icon height="120" platform="ios" src="package-assets/icon_120x120.png" width="120" />
+    <icon height="180" platform="ios" src="package-assets/icon_180x180.png" width="180" />
+    <icon height="76" platform="ios" src="package-assets/icon_76x76.png" width="76" />
+    <icon height="152" platform="ios" src="package-assets/icon_152x152.png" width="152" />
+    <icon height="40" platform="ios" src="package-assets/icon_40x40.png" width="40" />
+    <icon height="80" platform="ios" src="package-assets/icon_80x80.png" width="80" />
+    <icon height="57" platform="ios" src="package-assets/icon_57x57.png" width="57" />
+    <icon height="114" platform="ios" src="package-assets/icon_114x114.png" width="114" />
+    <icon height="72" platform="ios" src="package-assets/icon_72x72.png" width="72" />
+    <icon height="144" platform="ios" src="package-assets/icon_144x144.png" width="144" />
+    <icon height="50" platform="ios" src="package-assets/icon_50x50.png" width="50" />
+    <icon height="100" platform="ios" src="package-assets/icon_100x100.png" width="100" />
+    <icon height="167" platform="ios" src="package-assets/icon_167x167.png" width="167" />
+    <gap:config-file mode="merge" parent="/manifest/application" platform="android">
+        <activity android:launchMode="singleTop" />
+    </gap:config-file>
+    <edit-config file="*-Info.plist" mode="merge" target="NSCameraUsageDescription">
+        <string>Este aplicativo requer acesso à câmera</string>
+    </edit-config>
+    <edit-config file="*-Info.plist" mode="merge" target="NSPhotoLibraryUsageDescription">
+        <string>Este aplicativo requer acesso à biblioteca de fotos</string>
+    </edit-config>
+    <edit-config file="*-Info.plist" mode="merge" target="NSLocationWhenInUseUsageDescription">
+        <string>Este aplicativo requer acesso à sua localização</string>
+    </edit-config>
+    <edit-config file="*-Info.plist" mode="merge" target="NSPhotoLibraryAddUsageDescription">
+        <string>Este aplicativo requer acesso à biblioteca de fotos</string>
+    </edit-config>
+    <access origin="*" />
+    <allow-intent href="*" />
+    <splash src="res/screen/ios/Default@2x~universal~anyany.png" />
+    <splash src="res/screen/ios/Default@2x~universal~comany.png" />
+    <splash src="res/screen/ios/Default@2x~universal~comcom.png" />
+    <splash src="res/screen/ios/Default@3x~universal~anyany.png" />
+    <splash src="res/screen/ios/Default@3x~universal~anycom.png" />
+    <splash src="res/screen/ios/Default@3x~universal~comany.png" />
+    <preference name="AllowInlineMediaPlayback" value="false" />
+    <preference name="BackupWebStorage" value="cloud" />
+    <preference name="DisallowOverscroll" value="true" />
+    <preference name="EnableViewportScale" value="false" />
+    <preference name="KeyboardDisplayRequiresUserAction" value="true" />
+    <preference name="MediaTypesRequiringUserActionForPlayback" value="none" />
+    <preference name="SuppressesIncrementalRendering" value="false" />
+    <preference name="SuppressesLongPressGesture" value="false" />
+    <preference name="Suppresses3DTouchGesture" value="false" />
+    <preference name="GapBetweenPages" value="0" />
+    <preference name="PageLength" value="0" />
+    <preference name="PaginationBreakingMode" value="page" />
+    <preference name="PaginationMode" value="unpaginated" />
+    <preference name="StatusBarOverlaysWebView" value="false" />
+    <preference name="android-build-tool" value="gradle" />
+    <preference name="xwalkMultipleApk" value="true" />
+    <preference name="xwalk64bit" value="true" />
+    <preference name="buildArchitecture" value="X86_64" />
+    <preference name="webviewbounce" value="false" />
+    <preference name="SplashScreenDelay" value="1000" />
+    <preference name="StatusBarBackgroundColor" value="#ab47bc" />
+    <preference name="StatusBarStyle" value="lightcontent" />
+    <preference name="StatusBarDefaultScrollToTop" value="false" />
+    <preference name="deployment-target" value="12" />
+    <preference name="ios-configuration" value="adhoc" />
+    <preference name="iosPersistentFileLocation" value="Library" />
+    <preference name="iosExtraFilesystems" value="library,library-nosync,documents,documents-nosync,cache,bundle,root" />
+    <preference name="AllowBackForwardNavigationGestures" value="true" />
+    <preference name="Allow3DTouchLinkPreview" value="false" />
+    <preference name="allowFileAccessFromFileURLs" value="true" />
+    <preference name="allowUniversalAccessFromFileURLs" value="true" />
+    <preference name="AllowUntrustedCerts" value="on" />
+    <preference name="InterceptRemoteRequests" value="all" />
+    <preference name="NativeXHRLogging" value="full" />
+    <preference name="CameraUsesGeolocation" value="false" />
+</widget>

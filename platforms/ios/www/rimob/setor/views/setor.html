@@ -1,0 +1,23 @@
+﻿<div class="row">
+    <div class="col-xs-12">
+        <div class="box">
+            <!-- /.box-header -->
+            <div class="box-body table-responsive no-padding">
+                <md-list ng-cloak>
+                    <md-subheader class="md-no-sticky">Selecione o setor</md-subheader>
+                    <ta-findbox promisefunction="obterSetores(dsBusca)" targetobject="setores"></ta-findbox>
+                    <md-list-item href="#/imovel/setores/quadras/{{setor.SqSetor}}" ng-repeat="setor in setores | toArray">
+                        <p>
+                            {{setor.NmSetor | uppercase}}
+                            <ng-md-icon ng-show="setor.qtImoveis == 0" class="iconGreen" icon="done" size="20"></ng-md-icon>
+                        </p>
+                        <i class="fa fa-angle-right pull-right"></i>
+                    </md-list-item>
+                    <md-divider></md-divider>
+                </md-list>
+            </div>
+            <!-- /.box-body -->
+        </div>
+        <!-- /.box -->
+    </div>
+</div>

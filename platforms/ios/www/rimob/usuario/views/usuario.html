@@ -1,0 +1,23 @@
+﻿ <section class="content">
+     <!-- Profile Image -->
+     <div class="box box-primary" ng-init="obterUsuario()">
+         <div class="box-body box-profile">
+             <ng-md-icon class="usuario-icon img-responsive img-circle iconGrey" icon="account_circle" size="95"></ng-md-icon>
+             <h3 class="profile-username text-center">{{parametro.NmAgenteimobiliario}}</h3>
+             <p class="text-muted text-center">{{parametro.NmUnidgestora}}</p>
+             <ul class="list-group list-group-unbordered">
+                 <li class="list-group-item">
+                     <b>CNPJ</b> <a class="pull-right">{{parametro.NuCnpj | cnpj}}</a>
+                 </li>
+                 <li class="list-group-item">
+                     <b>CPF</b> <a class="pull-right">{{parametro.NuCpf | cpf}}</a>
+                 </li>
+             </ul>
+             <a ng-controller="loginCtrl" href="#/usuario/alterarSenha" class="btn btn-primary btn-block"><b>Alterar Senha</b></a>
+             <a ng-controller="loginCtrl" ng-click="logoutAgente()" class="btn btn-danger btn-block"><b>Finalizar Sessão</b></a>
+         </div>
+         <!-- /.box-body -->
+     </div> 
+
+
+ </section>

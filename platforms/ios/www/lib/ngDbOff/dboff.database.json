@@ -1,0 +1,344 @@
+﻿{
+  "dataBase": "Rimob",
+  "tables": [
+    {
+      "tableName": "Parametro",
+      "primaryKey": "SqAgenteimobiliario",
+      "columns": {
+        "SqAgenteimobiliario": "integer",
+        "NmAgenteimobiliario": "varchar(120)",
+        "NuCpf": "varchar(11)",
+        "NuCnpj": "varchar(14)",
+        "NmUnidgestora": "varchar(120)",
+        "CdMunicipio": "varchar(7)",
+        "DsFormulanumpublico": "varchar(120)",
+        "SqImovelrecadastramentomax": "integer",
+        "SgUf": "varchar(2)",
+        "RelImoveis": "integer"
+      }
+    },
+    {
+      "tableName": "Bairro",
+      "primaryKey": "SqBairro",
+      "columns": {
+        "SqBairro": "integer",
+        "NmBairro": "varchar(120)"
+      }
+    },
+    {
+      "tableName": "Logradouro",
+      "primaryKey": "SqLogradouro, SqBairro",
+      "columns": {
+        "SqLogradouro": "integer",
+        "NmLogradouro": "varchar(120)",
+        "TpLogradouro": "varchar(3)",
+        "SqBairro": "integer",
+        "NmBairro": "varchar(120)"
+      }
+    },
+    {
+      "tableName": "Tipo_Imovel",
+      "primaryKey": "SqTipoimovel",
+      "columns": {
+        "SqTipoimovel": "integer",
+        "NmTipoimovel": "varchar(60)"
+      }
+    },
+    {
+      "tableName": "Area_Agente",
+      "columns": {
+        "SqSetor": "integer",
+        "SqQuadra": "integer",
+        "SqBairro": "integer",
+        "SqLogradouro": "integer"
+      }
+    },
+    {
+      "tableName": "Distrito",
+      "primaryKey": "SqDistrito",
+      "columns": {
+        "SqDistrito": "integer",
+        "NmDistrito": "varchar(40)"
+      }
+    },
+    {
+      "tableName": "Imovel",
+      "columns": {
+        "NuCnpj": "varchar(14)",
+        "SqAgenteimobiliario": "integer",
+        "SqImovelrecadastramento": "integer",
+        "SqImovel": "integer",
+        "SqTipoimovel": "integer",
+        "NuLogradouro": "varchar(20)",
+        "NuPublico": "varchar(20)",
+        "NuPublicoanterior": "varchar(20)",
+        "SqBairro": "integer",
+        "SqLogradouro": "integer",
+        "SqContribuinte": "integer",
+        "SqContribuinterecadastramento": "integer",
+        "NuCepcorrespondencia": "nchar(10)",
+        "DsComplemento": "varchar(120)",
+        "NuUnidade": "integer",
+        "NuLote": "integer",
+        "SqQuadra": "integer",
+        "SqSetor": "integer",
+        "SqDistrito": "integer",
+        "FlIncidenciaimovel": "varchar(4)",
+        "FlModificado": "integer",
+        "FlExportado": "integer",
+        "FlNovoContribuinte": "integer",
+        "NuLatitude": "varchar(20)",
+        "NuLongitude": "varchar(20)",
+        "GdFotoimovel": "varchar(120)",
+        "NuSetorlogradouro": "varchar(20)",
+        "NuQuadralogradouro": "varchar(20)",
+        "NuLotelogradouro": "varchar(20)",
+        "SqCondominio": "integer",
+        "SqLoteamento": "integer",
+        "SqSecao": "integer",
+        "SqFace": "integer",
+        "NuApartamento": "varchar(20)",
+        "NmBloco": "varchar(50)",
+        "CdMunicipio": "varchar(7)",
+        "NuLogradourocorrespondencia": "varchar(20)",
+        "DsLogradourocorrespondencia": "varchar(120)",
+        "DsComplementocorrespondencia": "varchar(120)",
+        "DsBairrocorrespondencia": "varchar(120)",
+        "SqCartorio": "integer",
+        "DtEscritura": "datetime",
+        "NuEscritura": "varchar(20)",
+        "NuLivroregistro": "varchar(20)",
+        "NuFolhalivroregistro": "integer",
+        "SqContribuinteresponsavel": "integer",
+        "SqContribuinterecadastramentoresponsavel": "integer",
+        "VlAreaunidade": "decimal(15,2)",
+        "CdPais": "integer",
+        "FlNovoResponsavel": "integer",
+        "DsObservacao":  "varchar(500)"
+      }
+    },
+    {
+      "tableName": "Contribuinte",
+      "columns": {
+        "NuCnpj": "varchar(14)",
+        "SqAgenteimobiliario": "integer",
+        "SqContribuinterecadastramento": "integer",
+        "SqContribuinte": "integer",
+        "NmContribuinte": "varchar(120)",
+        "NuCpfcnpjcontribuinte": "varchar(14)",
+        "DsLogradouro": "varchar(120)",
+        "DsBairro": "varchar(120)",
+        "NuLogradouro": "varchar(8)",
+        "DsComplemento": "varchar(120)",
+        "DsEmail": "varchar(120)",
+        "NuCep": "varchar(10)",
+        "NuTelefone": "varchar(15)",
+        "NuCelular": "varchar(15)",
+        "CdMunicipio": "varchar(7)",
+        "SqLogradouro": "integer",
+        "SqBairro": "integer",
+        "CdPais": "integer",
+        "FlNovo": "integer",
+        "FlEditado": "integer"
+      }
+    },
+    {
+      "tableName": "Pais",
+      "primaryKey": "CdPais",
+      "columns": {
+        "CdPais": "integer",
+        "NmPais": "varchar(50)",
+        "SgPais": "char(2)"
+      }
+    },
+    {
+      "tableName": "Estado",
+      "columns": {
+        "SgUf": "varchar(2)",
+        "NmEstado": "varchar(50)"
+      }
+    },
+    {
+      "tableName": "Municipio",
+      "primaryKey": "CdMunicipio",
+      "columns": {
+        "CdMunicipio": "varchar(7)",
+        "NmMunicipio": "varchar(120)",
+        "SgUf": "varchar(2)"
+      }
+    },
+    {
+      "tableName": "Tipo_Fator",
+      "columns": {
+        "SqTipofator": "integer",
+        "NmTipofator": "varchar(30)",
+        "SqFator": "integer",
+        "NmFator": "varchar(50)",
+        "SqTipoimovel": "integer"
+      }
+    },
+    {
+      "tableName": "Fator_Imovel",
+      "columns": {
+        "NuCnpj": "varchar(14)",
+        "SqImovelrecadastramento": "integer",
+        "SqImovel": "integer",
+        "SqFator": "integer",
+        "DtDesativacao": "datetime",
+        "SqTipofator": "integer",
+        "SqAgenteimobiliario": "integer"
+      }
+    },
+    {
+      "tableName": "Area_Imovel",
+      "primaryKey": "SqAreaimovelrecadastramento, SqImovelrecadastramento",
+      "columns": {
+        "NuCnpj": "varchar(14)",
+        "SqAreaimovelrecadastramento": "integer",
+        "SqAreaimovel": "integer",
+        "SqImovelrecadastramento": "integer",
+        "SqImovel": "integer",
+        "VlFrenteterreno": "decimal(15,2)",
+        "VlFundoterreno": "decimal(15,2)",
+        "VlLadoesquerdoterreno": "decimal(15,2)",
+        "VlLadodireitoterreno": "decimal(15,2)",
+        "VlFrenteconstrucao": "decimal(15,2)",
+        "VlFundoconstrucao": "decimal(15,2)",
+        "VlLadoesquerdoconstrucao": "decimal(15,2)",
+        "VlLadodireitoconstrucao": "decimal(15,2)",
+        "VlTotalterreno": "decimal(15,2)",
+        "VlTotalconstruido": "decimal(15,2)",
+        "NmAreaimovel": "varchar(60)",
+        "SqAgenteimobiliario": "integer",
+        "FlIrregular": "varchar(1)"
+      }
+    },
+    {
+      "tableName": "Setor",
+      "primaryKey": "SqSetor",
+      "columns": {
+        "SqSetor": "integer",
+        "NmSetor": "varchar(25)",
+        "NuSetor": "integer",
+        "SqDistrito": "integer"
+      }
+    },
+    {
+      "tableName": "Quadra_Setor",
+      "primaryKey": "SqQuadra, SqSetor",
+      "columns": {
+        "SqQuadra": "integer",
+        "NmQuadra": "varchar(20)",
+        "NuQuadra": "integer",
+        "SqSetor": "integer"
+      }
+    },
+    {
+      "tableName": "Exportacao",
+      "columns": {
+        "NmTabela": "varchar(30)",
+        "FlExportada": "integer"
+      }
+    },
+    {
+      "tableName": "Notificacao",
+      "primaryKey": "TpNotificacao, SqNotificacao",
+      "columns": {
+        "TpNotificacao": "integer",
+        "SqNotificacao": "integer",
+        "DsTitulo": "varchar(30)",
+        "DsConteudo": "varchar(100)",
+        "DtNotificacao": "datetime",
+        "FlLida": "integer"
+      }
+    },
+    {
+      "tableName": "Importacao",
+      "columns": {
+        "NmTabela": "varchar(30)",
+        "FlImportada": "integer"
+      }
+    },
+    {
+      "tableName": "Foto",
+      "columns": {
+        "NuCnpj": "varchar(14)",
+        "SqAgenteimobiliario": "integer",
+        "SqFoto": "integer",
+        "SqImovelrecadastramento": "integer",
+        "NmFoto": "varchar(50)",
+        "Imagem": "text"
+      }
+    },
+    {
+      "tableName": "Condominio",
+      "primaryKey": "SqCondominio",
+      "columns": {
+        "SqCondominio": "integer",
+        "NmCondominio": "varchar(120)",
+        "SqBairro": "integer",
+        "SqLogradouro": "integer"
+      }
+    },
+    {
+      "tableName": "Secao",
+      "primaryKey": "SqSecao",
+      "columns": {
+        "SqSecao": "integer",
+        "NmSecao": "varchar(80)",
+        "NuSecao": "integer"
+      }
+    },
+    {
+      "tableName": "Face",
+      "primaryKey": "SqFace",
+      "columns": {
+        "SqFace": "integer",
+        "NuFace": "integer",
+        "SqBairro": "integer",
+        "SqLogradouro": "integer",
+        "SqQuadra": "integer"
+      }
+    },
+    {
+      "tableName": "Loteamento",
+      "primaryKey": "SqLoteamento",
+      "columns": {
+        "SqLoteamento": "integer",
+        "NmLoteamento": "varchar(120)",
+        "SqBairro": "integer",
+        "SqDistrito": "integer"
+      }
+    },
+    {
+      "tableName": "Cartorio",
+      "primaryKey": "SqCartorio",
+      "columns": {
+        "SqCartorio": "integer",
+        "NmCartorio": "varchar(120)",
+        "NuCnpjcartorio": "varchar(14)"
+      }
+    },
+    {
+      "tableName": "Entrevistado",
+      "columns": {
+        "NuCnpj": "varchar(14)",
+        "SqEntrevistadorecadastramento": "integer",
+        "NmEntrevistado": "varchar(120)",
+        "NuCpfentrevistado": "char(11)",
+        "NuRgentrevistado": "varchar(20)",
+        "DsVinculoentrevistado": "varchar(80)",
+        "DsContatoentrevistado": "varchar(200)",
+        "SqImovelrecadastramento": "integer",
+        "SqAgenteimobiliario": "integer",
+        "SqImovel": "integer"
+      }
+    },
+    {
+      "tableName": "Db_Version",
+      "columns": {
+        "id": "integer"
+      }
+    }
+  ]
+}

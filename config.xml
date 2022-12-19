@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget android-versionCode="20" defaultlocale="pt-BR" id="com.br.rimob" ios-CFBundleVersion="1.3.1" version="1.3.1" xmlns="http://www.w3.org/ns/widgets" xmlns:android="http://schemas.android.com/apk/res/android" xmlns:cdv="http://cordova.apache.org/ns/1.0" xmlns:gap="http://phonegap.com/ns/1.0">
+<widget android-versionCode="22" defaultlocale="pt-BR" id="com.br.rimob" ios-CFBundleVersion="1.3.2" version="1.3.2" xmlns="http://www.w3.org/ns/widgets" xmlns:android="http://schemas.android.com/apk/res/android" xmlns:cdv="http://cordova.apache.org/ns/1.0" xmlns:gap="http://phonegap.com/ns/1.0">
     <name>Rimob</name>
     <description>Rimob - Recadastramento Imobiliário</description>
     <author>3Tecnos Tecnologia</author>
@@ -17,23 +17,32 @@
     <preference name="xwalkMultipleApk" value="true" />
     <preference name="xwalk64bit" value="true" />
     <preference name="buildArchitecture" value="X86_64" />
+    <plugin name="cordova-plugin-statusbar" spec="https://github.com/apache/cordova-plugin-statusbar"/>
     <plugin name="cordova-build-architecture" source="git" spec="https://github.com/MBuchalik/cordova-build-architecture.git#v1.0.4" />
     <plugin name="cordova-plugin-geolocation" source="git" spec="https://github.com/apache/cordova-plugin-geolocation" />
+    <plugin name="cordova-plugin-file-transfer" source="git" spec="https://github.com/apache/cordova-plugin-file-transfer" />
     <plugin name="cordova-plugin-camera" source="git" spec="https://github.com/alemit/cordova-plugin-camera">
-        <variable name="CAMERA_USAGE_DESCRIPTION" value=" "/>
-        <variable name="PHOTOLIBRARY_USAGE_DESCRIPTION" value=" "/>
+        <variable name="CAMERA_USAGE_DESCRIPTION" value=" " />
+        <variable name="PHOTOLIBRARY_USAGE_DESCRIPTION" value=" " />
     </plugin>
+    <plugin name="cordova-sqlite-storage" spec="6.0.0" />
+    <plugin name="@globules-io/cordova-plugin-ios-xhr" source="git" spec="https://github.com/globules-io/cordova-plugin-ios-xhr" />
+    <!-- <plugin name="cordova-plugin-whitelist" spec="1.3.4" /> Adicionar somente para iOS -->
+    <plugin name="cordova-plugin-splashscreen" spec="6.0.2" />
     <preference name="webviewbounce" value="false" />
     <preference name="DisallowOverscroll" value="true" />
-    <preference name="SplashScreenDelay" value="4000" />
+    <preference name="SplashScreenDelay" value="1000" />
+    <preference name="StatusBarOverlaysWebView" value="false"/>
+    <preference name="StatusBarBackgroundColor" value="#ab47bc"/> 
+    <preference name="StatusBarStyle" value="lightcontent"/>
+    <preference name="StatusBarDefaultScrollToTop" value="false" />
     <variable name="GEOLOCATION_USAGE_DESCRIPTION" value=" " />
-    <plugin name="cordova-plugin-splashscreen" spec="6.0.2" />
     <platform name="android">
         <hook src="hooks/android/modify-android-gradle-plugin-version.js" type="after_platform_add" />
         <preference name="AndroidInsecureFileModeEnabled" value="true" />
         <preference name="AndroidPersistentFileLocation" value="Compatibility" />
         <preference name="android-minSdkVersion" value="20" />
-        <preference name="android-targetSdkVersion" value="30" />
+        <preference name="android-targetSdkVersion" value="31" />
         <preference name="android-installLocation" value="auto" />
         <preference name="android-signed" value="true" />
         <preference name="AndroidLaunchMode" value="singleTop" />
@@ -60,6 +69,15 @@
         <preference name="iosExtraFilesystems" value="library,library-nosync,documents,documents-nosync,cache,bundle,root" />
         <preference name="AllowBackForwardNavigationGestures" value="true" />
         <preference name="Allow3DTouchLinkPreview" value="false" />
+        <preference name="allowFileAccessFromFileURLs" value="true" />
+        <preference name="allowUniversalAccessFromFileURLs" value="true" />
+        <preference name="AllowUntrustedCerts" value="on" />
+        <preference name="InterceptRemoteRequests" value="all" />
+        <preference name="NativeXHRLogging" value="full" />
+        
+        <!-- IOS  camera access, for cordova camera plugin -->
+        <preference name="CameraUsesGeolocation" value="false" />
+
         <splash src="res/screen/ios/Default@2x~universal~anyany.png" />
         <splash src="res/screen/ios/Default@2x~universal~comany.png" />
         <splash src="res/screen/ios/Default@2x~universal~comcom.png" />
@@ -91,10 +109,24 @@
     <gap:config-file mode="merge" parent="/manifest/application" platform="android">
         <activity android:launchMode="singleTop" />
     </gap:config-file>
-    <gap:config-file mode="replace" parent="NSPhotoLibraryUsageDescription" platform="ios">
+    <!-- <gap:config-file mode="replace" parent="NSPhotoLibraryUsageDescription" platform="ios">
         <string>Este aplicativo requer acesso à biblioteca de fotos.</string>
-    </gap:config-file>
-    <gap:config-file mode="replace" parent="NSCameraUsageDescription" platform="ios">
+    </gap:config-file> -->
+    <!-- <gap:config-file mode="replace" parent="NSCameraUsageDescription" platform="ios">
         <string>Este aplicativo requer acesso à câmera</string>
-    </gap:config-file>
+    </gap:config-file> -->
+
+    <edit-config target="NSCameraUsageDescription" file="*-Info.plist" mode="merge">
+        <string>Este aplicativo requer acesso à câmera</string>
+    </edit-config>
+    <edit-config target="NSPhotoLibraryUsageDescription" file="*-Info.plist" mode="merge">
+        <string>Este aplicativo requer acesso à biblioteca de fotos</string>
+    </edit-config>
+    <edit-config target="NSLocationWhenInUseUsageDescription" file="*-Info.plist" mode="merge">
+        <string>Este aplicativo requer acesso à sua localização</string>
+    </edit-config>
+    <edit-config target="NSPhotoLibraryAddUsageDescription" file="*-Info.plist" mode="merge">
+        <string>Este aplicativo requer acesso à biblioteca de fotos</string>
+    </edit-config>
+    
 </widget>

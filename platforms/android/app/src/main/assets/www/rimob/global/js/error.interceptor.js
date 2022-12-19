@@ -28,7 +28,7 @@
           let errorMsg =
             "Não foi possível conectar-se ao servidor. Verifique se está conectado à internet e tente novamente.";
           $rootScope.$broadcast("responseErrorInterceptor", {
-            exceptionMessage: error,
+            exceptionMessage: errorMsg,
           });
         }
 

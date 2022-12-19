@@ -7,20 +7,37 @@
     "files": {}
   },
   "installed_plugins": {
-    "cordova-plugin-splashscreen": {
+    "cordova-build-architecture": {
       "PACKAGE_NAME": "com.br.rimob"
     },
-    "cordova-build-architecture": {
+    "cordova-plugin-camera": {
+      "ANDROIDX_CORE_VERSION": "1.6.+",
+      "PACKAGE_NAME": "com.br.rimob"
+    },
+    "cordova-plugin-file-transfer": {
       "PACKAGE_NAME": "com.br.rimob"
     },
     "cordova-plugin-geolocation": {
       "GPS_REQUIRED": "true",
       "PACKAGE_NAME": "com.br.rimob"
     },
-    "cordova-plugin-camera": {
-      "ANDROIDX_CORE_VERSION": "1.6.+",
+    "cordova-plugin-splashscreen": {
+      "PACKAGE_NAME": "com.br.rimob"
+    },
+    "cordova-plugin-statusbar": {
+      "PACKAGE_NAME": "com.br.rimob"
+    },
+    "cordova-sqlite-storage": {
+      "PACKAGE_NAME": "com.br.rimob"
+    },
+    "@globules-io/cordova-plugin-ios-xhr": {
       "PACKAGE_NAME": "com.br.rimob"
     }
   },
-  "dependent_plugins": {}
+  "dependent_plugins": {
+    "cordova-plugin-file": {
+      "ANDROIDX_WEBKIT_VERSION": "1.4.0",
+      "PACKAGE_NAME": "com.br.rimob"
+    }
+  }
 }

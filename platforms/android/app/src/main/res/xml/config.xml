@@ -1,15 +1,30 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget android-versionCode="20" defaultlocale="pt-BR" id="com.br.rimob" ios-CFBundleVersion="1.3.1" version="1.3.1" xmlns="http://www.w3.org/ns/widgets" xmlns:android="http://schemas.android.com/apk/res/android" xmlns:cdv="http://cordova.apache.org/ns/1.0" xmlns:gap="http://phonegap.com/ns/1.0">
+<widget android-versionCode="22" defaultlocale="pt-BR" id="com.br.rimob" ios-CFBundleVersion="1.3.2" version="1.3.2" xmlns="http://www.w3.org/ns/widgets" xmlns:android="http://schemas.android.com/apk/res/android" xmlns:cdv="http://cordova.apache.org/ns/1.0" xmlns:gap="http://phonegap.com/ns/1.0">
+    <preference default="arm" name="buildArchitecture" />
+    <feature name="Camera">
+        <param name="android-package" value="org.apache.cordova.camera.CameraLauncher" />
+    </feature>
+    <feature name="File">
+        <param name="android-package" value="org.apache.cordova.file.FileUtils" />
+        <param name="onload" value="true" />
+    </feature>
+    <allow-navigation href="cdvfile:*" />
+    <feature name="FileTransfer">
+        <param name="android-package" value="org.apache.cordova.filetransfer.FileTransfer" />
+    </feature>
+    <feature name="Geolocation">
+        <param name="android-package" value="org.apache.cordova.geolocation.Geolocation" />
+    </feature>
     <feature name="SplashScreen">
         <param name="android-package" value="org.apache.cordova.splashscreen.SplashScreen" />
         <param name="onload" value="true" />
     </feature>
-    <preference default="arm" name="buildArchitecture" />
-    <feature name="Geolocation">
-        <param name="android-package" value="org.apache.cordova.geolocation.Geolocation" />
+    <feature name="StatusBar">
+        <param name="android-package" value="org.apache.cordova.statusbar.StatusBar" />
+        <param name="onload" value="true" />
     </feature>
-    <feature name="Camera">
-        <param name="android-package" value="org.apache.cordova.camera.CameraLauncher" />
+    <feature name="SQLitePlugin">
+        <param name="android-package" value="io.sqlc.SQLitePlugin" />
     </feature>
     <name>Rimob</name>
     <description>Rimob - Recadastramento Imobiliário</description>
@@ -49,12 +64,18 @@
     <gap:config-file mode="merge" parent="/manifest/application" platform="android">
         <activity android:launchMode="singleTop" />
     </gap:config-file>
-    <gap:config-file mode="replace" parent="NSPhotoLibraryUsageDescription" platform="ios">
-        <string>Este aplicativo requer acesso à biblioteca de fotos.</string>
-    </gap:config-file>
-    <gap:config-file mode="replace" parent="NSCameraUsageDescription" platform="ios">
+    <edit-config file="*-Info.plist" mode="merge" target="NSCameraUsageDescription">
         <string>Este aplicativo requer acesso à câmera</string>
-    </gap:config-file>
+    </edit-config>
+    <edit-config file="*-Info.plist" mode="merge" target="NSPhotoLibraryUsageDescription">
+        <string>Este aplicativo requer acesso à biblioteca de fotos</string>
+    </edit-config>
+    <edit-config file="*-Info.plist" mode="merge" target="NSLocationWhenInUseUsageDescription">
+        <string>Este aplicativo requer acesso à sua localização</string>
+    </edit-config>
+    <edit-config file="*-Info.plist" mode="merge" target="NSPhotoLibraryAddUsageDescription">
+        <string>Este aplicativo requer acesso à biblioteca de fotos</string>
+    </edit-config>
     <hook src="hooks/android/modify-android-gradle-plugin-version.js" type="after_platform_add" />
     <edit-config file="app/src/main/AndroidManifest.xml" mode="merge" target="/manifest/application">
         <application android:usesCleartextTraffic="true" />
@@ -68,17 +89,21 @@
     <splash density="hdpi" height="480" orientation="landscape" src="package-assets/splash-640X480.png" width="640" />
     <splash density="xhdpi" height="720" orientation="landscape" src="package-assets/splash-960X720.png" width="960" />
     <preference name="loglevel" value="DEBUG" />
+    <preference name="StatusBarOverlaysWebView" value="false" />
     <preference name="android-build-tool" value="gradle" />
     <preference name="xwalkMultipleApk" value="true" />
     <preference name="xwalk64bit" value="true" />
     <preference name="buildArchitecture" value="X86_64" />
     <preference name="webviewbounce" value="false" />
     <preference name="DisallowOverscroll" value="true" />
-    <preference name="SplashScreenDelay" value="4000" />
+    <preference name="SplashScreenDelay" value="1000" />
+    <preference name="StatusBarBackgroundColor" value="#ab47bc" />
+    <preference name="StatusBarStyle" value="lightcontent" />
+    <preference name="StatusBarDefaultScrollToTop" value="false" />
     <preference name="AndroidInsecureFileModeEnabled" value="true" />
     <preference name="AndroidPersistentFileLocation" value="Compatibility" />
     <preference name="android-minSdkVersion" value="20" />
-    <preference name="android-targetSdkVersion" value="30" />
+    <preference name="android-targetSdkVersion" value="31" />
     <preference name="android-installLocation" value="auto" />
     <preference name="android-signed" value="true" />
     <preference name="AndroidLaunchMode" value="singleTop" />
