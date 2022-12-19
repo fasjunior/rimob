@@ -261,6 +261,7 @@ rimobApp.run([
       document.addEventListener(
         "deviceready",
         function () {
+          navigator.splashscreen.hide();
           StatusBar.backgroundColorByHexString(color);
         },
         false

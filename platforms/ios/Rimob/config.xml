@@ -62,27 +62,27 @@
     <access launch-external="yes" origin="*" />
     <allow-navigation href="*" />
     <variable name="GEOLOCATION_USAGE_DESCRIPTION" value=" " />
-    <icon density="ldpi" height="36" platform="android" src="package-assets/icon_36x36.png" width="36" />
-    <icon density="mdpi" height="48" platform="android" src="package-assets/icon_48x48.png" width="48" />
-    <icon density="hdpi" height="72" platform="android" src="package-assets/icon_72x72.png" width="72" />
-    <icon density="xhdpi" height="96" platform="android" src="package-assets/icon_96x96.png" width="96" />
-    <icon height="29" platform="ios" src="package-assets/icon_29x29.png" width="29" />
-    <icon height="58" platform="ios" src="package-assets/icon_58x58.png" width="58" />
-    <icon height="87" platform="ios" src="package-assets/icon_87x87.png" width="87" />
-    <icon height="60" platform="ios" src="package-assets/icon_60x60.png" width="60" />
-    <icon height="120" platform="ios" src="package-assets/icon_120x120.png" width="120" />
-    <icon height="180" platform="ios" src="package-assets/icon_180x180.png" width="180" />
-    <icon height="76" platform="ios" src="package-assets/icon_76x76.png" width="76" />
-    <icon height="152" platform="ios" src="package-assets/icon_152x152.png" width="152" />
-    <icon height="40" platform="ios" src="package-assets/icon_40x40.png" width="40" />
-    <icon height="80" platform="ios" src="package-assets/icon_80x80.png" width="80" />
-    <icon height="57" platform="ios" src="package-assets/icon_57x57.png" width="57" />
-    <icon height="114" platform="ios" src="package-assets/icon_114x114.png" width="114" />
-    <icon height="72" platform="ios" src="package-assets/icon_72x72.png" width="72" />
-    <icon height="144" platform="ios" src="package-assets/icon_144x144.png" width="144" />
-    <icon height="50" platform="ios" src="package-assets/icon_50x50.png" width="50" />
-    <icon height="100" platform="ios" src="package-assets/icon_100x100.png" width="100" />
-    <icon height="167" platform="ios" src="package-assets/icon_167x167.png" width="167" />
+    <icon density="ldpi" height="36" platform="android" src="res/icon/icon_36x36.png" width="36" />
+    <icon density="mdpi" height="48" platform="android" src="res/icon/icon_48x48.png" width="48" />
+    <icon density="hdpi" height="72" platform="android" src="res/icon/icon_72x72.png" width="72" />
+    <icon density="xhdpi" height="96" platform="android" src="res/icon/icon_96x96.png" width="96" />
+    <icon height="29" platform="ios" src="res/icon/icon_29x29.png" width="29" />
+    <icon height="58" platform="ios" src="res/icon/icon_58x58.png" width="58" />
+    <icon height="87" platform="ios" src="res/icon/icon_87x87.png" width="87" />
+    <icon height="60" platform="ios" src="res/icon/icon_60x60.png" width="60" />
+    <icon height="120" platform="ios" src="res/icon/icon_120x120.png" width="120" />
+    <icon height="180" platform="ios" src="res/icon/icon_180x180.png" width="180" />
+    <icon height="76" platform="ios" src="res/icon/icon_76x76.png" width="76" />
+    <icon height="152" platform="ios" src="res/icon/icon_152x152.png" width="152" />
+    <icon height="40" platform="ios" src="res/icon/icon_40x40.png" width="40" />
+    <icon height="80" platform="ios" src="res/icon/icon_80x80.png" width="80" />
+    <icon height="57" platform="ios" src="res/icon/icon_57x57.png" width="57" />
+    <icon height="114" platform="ios" src="res/icon/icon_114x114.png" width="114" />
+    <icon height="72" platform="ios" src="res/icon/icon_72x72.png" width="72" />
+    <icon height="144" platform="ios" src="res/icon/icon_144x144.png" width="144" />
+    <icon height="50" platform="ios" src="res/icon/icon_50x50.png" width="50" />
+    <icon height="100" platform="ios" src="res/icon/icon_100x100.png" width="100" />
+    <icon height="167" platform="ios" src="res/icon/icon_167x167.png" width="167" />
     <gap:config-file mode="merge" parent="/manifest/application" platform="android">
         <activity android:launchMode="singleTop" />
     </gap:config-file>
@@ -125,7 +125,7 @@
     <preference name="xwalk64bit" value="true" />
     <preference name="buildArchitecture" value="X86_64" />
     <preference name="webviewbounce" value="false" />
-    <preference name="SplashScreenDelay" value="1000" />
+    <preference name="SplashScreenDelay" value="3000" />
     <preference name="StatusBarBackgroundColor" value="#ab47bc" />
     <preference name="StatusBarStyle" value="lightcontent" />
     <preference name="StatusBarDefaultScrollToTop" value="false" />
