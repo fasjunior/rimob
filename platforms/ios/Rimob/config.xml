@@ -83,6 +83,7 @@
     <icon height="50" platform="ios" src="res/icon/icon_50x50.png" width="50" />
     <icon height="100" platform="ios" src="res/icon/icon_100x100.png" width="100" />
     <icon height="167" platform="ios" src="res/icon/icon_167x167.png" width="167" />
+    <icon height="1024" platform="ios" src="res/icon/icon_1024x1024.png" width="1024" />
     <gap:config-file mode="merge" parent="/manifest/application" platform="android">
         <activity android:launchMode="singleTop" />
     </gap:config-file>
