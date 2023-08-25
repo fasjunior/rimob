@@ -113,7 +113,7 @@ rimobApp.constant("appConfig", {
   baseUrl: "/",
   dataBase: "Rimob.db",
   dados: "lib/ngDbOff/dboff.data.json",
-  version: "1.3.3",
+  version: "1.3.5",
   dbVersion: 3, //Controla a atualização do banco do Rimob. Se necessário a atualização,
   //incrementar essa variável e incluir os scripts no arquivo scripts.sql.json (Lembrar de incluir a query de atualizar o id na tabela Db_Version).
   credential: {
